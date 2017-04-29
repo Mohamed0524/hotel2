@@ -1,2 +1,33 @@
 {% extends 'base/base.html' %}
-<h1>Hotel List page</h1>
+{% load staticfiles %}
+{% block content %}
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="page-header">
+          <h1>Check-In: <small>Find your home, away from home.</small></h1>
+      </div>
+    <!-- Displays Each Hotel as a "Card" and a button to visit the hotels page. -->
+  {% for Hotel in Hotels %}
+
+      <div class="card">
+
+        <img class="card-img-top" src="{% static "/images/imag.jpg" %}" alt="Card image"> <!--Hotel thumbnail path -->
+
+        <div class="card-block">
+          <h4 class="card-Title">{{ Hotel.Name}}</h4>
+          <p class ="card-text">{{Hotel.Description}}</p>
+
+        {% if user.is_authenticated %}
+          <a href="{% url 'HotelApp:hoteldetails' Hotel.id %}" class="btn btn-primary">View</a> <!-- Hotels / Hotel id -->
+
+
+        {% else %}
+                <a href="/login" class="btn btn-primary">View</a>
+
+        {% endif %}
+       </div>
+    </div>
+  {% endfor %}
+  </div>
+</div>
+{% endblock %}

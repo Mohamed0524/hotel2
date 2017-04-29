@@ -1,0 +1,69 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+    <!-- Displays the Hotels Name, Country and City and Company Name -->
+      <div class="page-header">
+
+          <h2>{{hotels.Name}} <small class="text-muted">- <u>Partner Here</u></small>
+
+          </h2>
+          <small>{{ hotels.Country}} |  {{ hotels.City}}</small>
+      </div>
+      <!-- Slideshow of all the Hotels Photos -->
+
+      <!-- End Slideshow -->
+
+    <!-- Information Box , Hotel details ( Address, Tel etc ) & Hotel Rating-->
+    <hr>
+    <div class= "panel panel-primary">
+
+      <div class = "panel-heading">
+        <h3 class="panel-title">Hotel Details:</h3>
+      </div>
+
+      <div class="panel panel-body">
+
+          <dl class="row">
+              <dt class="col-sm-5">Check-In User Rating:</dt>
+                <dd class="col-sm-7">
+                    <img src="" /> <!-- Star path-->
+                    <b>Rating%</b>
+                </dd>
+              <dt class="col-sm-5">Address:</dt>
+                <dd class="col sm-7">
+                    {{ hotels.Address}}
+                </dd>
+              <dt class="col-sm-5">Telephone Number:</dt>
+                <dd class="col sm-7">
+                    {{ hotels.TelephoneNumber}}
+                </dd>
+        <!-- Unless there is only 1 hotel in this City , Display a recommended Hotel. -->
+
+
+        </dl>
+
+  </div>
+</div>
+
+<hr>
+      <!-- Displays a list of all Rooms that this Hotel Offers and the rooms information. -->
+
+
+
+
+<!-- Displays a table with all the reviews of the hotel that users have left. -->
+
+<!-- If the User has made a booking with the current hotel , display a Add review form. -->
+
+
+<!-- If Laravel Validation detects errors then this will show a message. -->
+
+</div>
+</div>
+
+{% endblock %}
+
+<!-- The scripts for the page are included below , Slideshow / Rating -->
