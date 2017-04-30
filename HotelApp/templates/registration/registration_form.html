@@ -1,35 +1,45 @@
 {% extends "base/base.html" %}
 {% block content %}
-<h1 class="form-signin-heading">Register here</h1>
-<form role="form" method="post" action=".">
-  {% csrf_token %}
-  <div class="form-group">
-    <p class="required">
-      <label class="required" for="id_username">
-        Username:
-      </label>
-      <input class="form-control" id="id_username" maxlength="30" name="username" type="text"  />
-    </p>
-    <p class="required">
-      <label class="required" for="id_email">
-        E-Mail:
-      </label>
-      <input class="form-control" id="id_email" name="email" type="email" />
-    </p>
-    <p class="required">
-      <label class="required" for="id_password1">
-        Password:
-      </label>
-      <input class="form-control" id="id_password1" name="password1" type="password" />
-    </p>
-    <p class="required">
-      <label class="required" for="id_password2">
-        Password confirmation:
-      </label>
-      <input class="form-control" id="id_password2" name="password2" type="password" />
-    </p>
-
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
-{% endblock %}
+{% if user.is_authenticated %}
+  <h1 class="form-signin-heading">Restricted Page , You are already logged In!</h1>
+{%else%}
+  <h1 class="form-signin-heading">Register here</h1>
+  <form role="form" method="post" action=".">
+    {{form.non_field_errors}}
+    {% csrf_token %}
+    <div class="form-group">
+      <p class="required">
+        <label class="required" for="id_username">
+          Username:
+        </label>
+        <input class="form-control" id="id_username" maxlength="30" name="username" type="text"  />
+      </p>
+      <p class="required">
+        <label class="required" for="id_email">
+          E-Mail:
+        </label>
+        <input class="form-control" id="id_email" name="email" type="email" />
+      </p>
+      <p class="required">
+        <label class="required" for="id_password1">
+          Password:
+        </label>
+        <input class="form-control" id="id_password1" name="password1" type="password" />
+      </p>
+      <p>
+        {{form.password1.errors}}
+      </p>
+      <p class="required">
+        <label class="required" for="id_password2">
+          Password confirmation:
+        </label>
+        <input class="form-control" id="id_password2" name="password2" type="password" />
+      </p>
+      <p>
+        {{form.password2.errors}}
+      </p>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+  {% endif %}
+  {% endblock %}
