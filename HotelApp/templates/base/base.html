@@ -52,13 +52,13 @@
                               </a>
 
                               <ul class="dropdown-menu">
-                                  <li> <a href="#">Logout</a>
+                                  <li> <a href="{% url 'auth_logout'%}?next=/">Logout</a>
                                   </li>
                               </ul>
                           </li>
                           {% else %}
-                          <li><a href="">Login</a></li>
-                          <li><a href="">Register</a></li>
+                          <li><a href="{% url 'auth_login'%}">Login</a></li>
+                          <li><a href="{% url 'registration_register'%}">Register</a></li>
                           {% endif %}
                         </ul>
                     </div>

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'HotelApp',
+    'registration',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,10 @@ USE_TZ = True
 
 STATICFILES_DIRS = [STATIC_DIR,]
 STATIC_URL = '/static/'
+
+#Registration settings
+REGISTRATION_OPEN = True
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/HotelApp/'

@@ -72,8 +72,8 @@
               <a href="{% url 'HotelApp:hotelindex' %}">  Home</a>
               <a href="#">Logout</a>
             {% else %}
-          <a href="#">Login</a>
-          <a href="#">Register Here</a>
+          <a href="{% url 'auth_login'%}">Login</a>
+          <a href="{% url 'registration_register'%}">Register Here</a>
 
         {% endif %}
         </div>
