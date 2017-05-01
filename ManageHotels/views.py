@@ -69,3 +69,15 @@ class RoomUpdateView(UpdateView):
 
     def form_valid(self, form):
         return super(UpdateView, self).form_valid(form)
+
+
+class RoomDeleteView(DeleteView):
+
+    model = Room
+    def get_success_url(self):
+        roomid = self.kwargs['pk']
+        room= Room.objects.get(id = roomid)
+        hotel = room.hotel
+        hotelid = hotel.id
+        url = reverse('ManageHotels:showRoomsDash', args=[hotelid])
+        return url
