@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<!--  unless role id is equal to 2 -->
+
+<!-- Displays the Partners Dashboard -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Dashboard</div>
+
+
+
+                <div class="panel-body">
+                    <div class="list-group">
+                      <!--  partner id in link -->
+                      <a href="{% url 'ManageHotels:showhotel'  %}" class="list-group-item">View Your Hotels</a>
+                      <a href="newhotel" class="list-group-item">List a New Hotel</a>
+
+
+                    </div>
+                </div>
+                <div class="panel-footel text-center">
+                    Welcome  You are logged in!  </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- else
+
+  <h1> No Way.</h1>-->
+
+
+{% endblock %}

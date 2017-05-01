@@ -13,6 +13,7 @@ class MyRegistrationView(RegistrationView):
 urlpatterns = [
     url(r'^$', views.home , name = 'home'),
     url(r'^HotelApp/', include('HotelApp.urls')),
+    url(r'^ManageHotels/', include('ManageHotels.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^accounts/register/$', MyRegistrationView.as_view(),),

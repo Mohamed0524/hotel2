@@ -1,0 +1,18 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+  <div class="panel-body">
+<!-- List All the Hotels belonging to the Signed in partner , Linking to the Hotel Dashboard of each Hotel -->
+      <div class="list-group">
+
+          {%for hotel in Hotels%}
+            <a href="{% url 'ManageHotels:showHotelDash' hotel.id %}" class="list-group-item">{{hotel.Name}}</a>
+
+          {% endfor %}
+
+      </div>
+      <hr>
+      <a class="btn btn-default pull-right" href="{% url 'ManageHotels:home' %}">Back</a>
+  </div>
+
+{% endblock %}
