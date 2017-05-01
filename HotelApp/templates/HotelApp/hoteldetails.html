@@ -56,8 +56,53 @@
 
 <!-- Displays a table with all the reviews of the hotel that users have left. -->
 
-<!-- If the User has made a booking with the current hotel , display a Add review form. -->
+<h4>Reviews:</h4>
 
+<table class="table">
+
+      <thead>
+        <tr>
+        <th>User</th>
+        <th>Comment</th>
+        <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% if reviews %}
+
+        {% for review in reviews %}
+
+          <tr>
+              <td><a class="" href="#">{{review.user.username}}:</a></td>
+              <td>{{review.comment}}</td>
+              <!-- If the User that Posted the review and the current user match , display an edit and Delete button.-->
+                {% if review.user_id == user.id %}
+                  <td><a class="btn btn-default pull-right btn-sm" href="{% url 'HotelApp:editreview' review.id %}">Edit Review</a></td>
+
+                  <td>
+                    <form action="{% url 'HotelApp:deletereview' review.id %}" method="post">
+                      {% csrf_token %}
+                
+                        <button type="submit" class="btn btn-danger pull-right btn-sm">Delete Review</button>
+                      </form>
+
+                  </td>
+
+                  {% else %}
+                    <td></td>
+                    <td></td>
+                  {%endif%}
+
+          </tr>
+
+        {% endfor%}
+      {% endif %}
+      </tbody>
+</table>
+<hr>
+
+<!-- If the User has made a booking with the current hotel , display a Add review form. -->
+<a class="btn btn-info pull-right btn-sm" href="{% url 'HotelApp:createreview' hotels.id %}">ADD Review</a>
 
 <!-- If Laravel Validation detects errors then this will show a message. -->
 
