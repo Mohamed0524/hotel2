@@ -42,6 +42,24 @@ class HotelCreateView(CreateView):
         return url
     def form_valid(self, form):
         return super(HotelCreateView, self).form_valid(form)
+class HotelUpdateView(UpdateView):
+
+    model = Hotels
+    fields = ['Name','Address','City','Country','TelephoneNumber','ImagePath','Description']
+    def get_success_url(self):
+        hotelid = self.kwargs['pk']
+        url = reverse('ManageHotels:showHotelDash', args=[hotelid])
+        return url
+    def form_valid(self, form):
+        return super(UpdateView, self).form_valid(form)
+
+class HotelDeleteView(DeleteView):
+    model = Hotels
+    def get_success_url(self):
+        url = reverse('ManageHotels:home')
+        return url
+    def form_valid(self, form):
+        return super(HotelDeleteView, self).form_valid(form)
 
 class RoomCreateView(CreateView):
 
@@ -68,7 +86,7 @@ class RoomUpdateView(UpdateView):
         return url
 
     def form_valid(self, form):
-        return super(UpdateView, self).form_valid(form)
+        return super(RoomUpdateView, self).form_valid(form)
 
 
 class RoomDeleteView(DeleteView):

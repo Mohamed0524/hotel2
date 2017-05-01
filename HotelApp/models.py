@@ -20,8 +20,8 @@ class Hotels(models.Model):
          return self.Name
 
 class Review(models.Model):
-    user = models.ForeignKey(User)
-    hotel = models.ForeignKey(Hotels)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    hotel = models.ForeignKey(Hotels,on_delete=models.CASCADE)
     comment = models.CharField(max_length  = 255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -33,7 +33,7 @@ class Review(models.Model):
          return self.comment
 
 class Room(models.Model):
-    hotel = models.ForeignKey(Hotels)
+    hotel = models.ForeignKey(Hotels,on_delete=models.CASCADE)
     RoomType = models.CharField(max_length  = 255)
     Capacity = models.IntegerField(default = 0)
     BedOption = models.CharField(max_length  = 255)

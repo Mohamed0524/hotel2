@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-6 col-md-4">
-        <a href="#" class="thumbnail">
+        <a href="{% url 'ManageHotels:editHotel' Hotel.id %}" class="thumbnail">
           <img src="{% static "/images/new.png" %}" alt="..." />
         </a>
         <p class="text-center">
@@ -22,9 +22,12 @@
         </p>
       </div>
       <div class="col-xs-6 col-md-4">
-        <a href="#" class="thumbnail">
+        <form action="{% url 'ManageHotels:deleteHotel' Hotel.id %}" method="post">
+            {% csrf_token %}
+        <button type="submit" class="thumbnail">
           <img src="{% static "/images/delete.png" %}" alt="..." />
-        </a>
+        </button>
+      </form>
         <p class="text-center">
           <b>Delete Hotel</b>
         </p>
