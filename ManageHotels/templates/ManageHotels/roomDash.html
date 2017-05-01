@@ -34,7 +34,7 @@
                           <td><a class="" href="#"> {{room.RoomType}}:</a></td>
                           <td></td>
 
-                          <td><a class="btn btn-default pull-right" href="">Edit Room</a></td>
+                          <td><a class="btn btn-default pull-right" href="{% url 'ManageHotels:editRoom' room.id %}">Edit Room</a></td>
                           <td><a class="btn btn-danger pull-right" href="/rooms//discard">Delete Room</a></td>
 
                         </tr>

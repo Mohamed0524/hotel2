@@ -55,3 +55,17 @@ class RoomCreateView(CreateView):
     def form_valid(self, form):
         form.instance.hotel_id = self.kwargs['pk']
         return super(RoomCreateView, self).form_valid(form)
+class RoomUpdateView(UpdateView):
+
+    model = Room
+    fields = ['RoomType','Capacity','BedOption','Price','View','TotalRooms']
+    def get_success_url(self):
+        roomid = self.kwargs['pk']
+        room= Room.objects.get(id = roomid)
+        hotel = room.hotel
+        hotelid = hotel.id
+        url = reverse('ManageHotels:showRoomsDash', args=[hotelid])
+        return url
+
+    def form_valid(self, form):
+        return super(UpdateView, self).form_valid(form)

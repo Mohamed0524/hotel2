@@ -9,5 +9,6 @@ urlpatterns = [
      url(r'^yourhotels/(?P<pk>[0-9]+)/dashboard$', views.showdashboard, name='showHotelDash'),
      url(r'^yourhotels/(?P<pk>[0-9]+)/rooms$', views.showRoomsDash, name='showRoomsDash'),
      url(r'^yourhotels/(?P<pk>[0-9]+)/rooms/add$', views.RoomCreateView.as_view(), name='addRoom'),
-    
+     url(r'^yourhotels/(?P<pk>[0-9]+)/rooms/edit$', views.RoomUpdateView.as_view(), name='editRoom'),
+
 ]
