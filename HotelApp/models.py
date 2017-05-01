@@ -31,3 +31,19 @@ class Review(models.Model):
 
     def __str__(self):
          return self.comment
+
+class Room(models.Model):
+    hotel = models.ForeignKey(Hotels)
+    RoomType = models.CharField(max_length  = 255)
+    Capacity = models.IntegerField(default = 0)
+    BedOption = models.CharField(max_length  = 255)
+    Price= models.IntegerField(default = 0)
+    View = models.CharField(max_length  = 255)
+    TotalRooms = models.CharField(max_length  = 255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    class Meta:
+        verbose_name_plural = 'Room'
+
+    def __str__(self):
+         return self.comment

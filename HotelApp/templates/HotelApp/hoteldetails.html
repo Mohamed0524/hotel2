@@ -50,7 +50,26 @@
 
 <hr>
       <!-- Displays a list of all Rooms that this Hotel Offers and the rooms information. -->
+      <h4>Rooms:</h4>
+      {% if rooms %}
 
+        {% for room in rooms %}
+
+
+
+
+        <h5><u> {{room.RoomType}}</u></h5>
+        <p><mark>Max Occupants :</mark>  {{room.Capacity}} People.</p>
+        <p><mark>Beds Provided :</mark> {{room.BedOption}}.</p>
+        <p><mark>View :</mark> {{room.View}}.</p>
+        <p><mark>Price :</mark> £{{room.Price}}</p>
+        <p><b>Rooms Left: </b>{{room.spaceleft}}</p>
+       {% endfor %}
+      {%endif%}
+
+          <!-- If Room has more than 0 rooms , Display a button to book the room.
+
+           -->
 
 
 
@@ -82,7 +101,7 @@
                   <td>
                     <form action="{% url 'HotelApp:deletereview' review.id %}" method="post">
                       {% csrf_token %}
-                
+
                         <button type="submit" class="btn btn-danger pull-right btn-sm">Delete Review</button>
                       </form>
 

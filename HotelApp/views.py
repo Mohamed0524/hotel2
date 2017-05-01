@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from HotelApp.models import Hotels
 from HotelApp.models import Review
+from HotelApp.models import Room
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django import forms
@@ -24,8 +25,11 @@ def hoteldetails(request, pk):
     #thehotel = Category.objects.filter(id = pk)[0]
     thehotel = Hotels.objects.get(id = pk)
     reviews = Review.objects.filter(hotel=thehotel)
+    rooms = Room.objects.filter(hotel=thehotel)
+    for room in rooms:
+        room.spaceleft = 1
     current_user = request.user
-    context = {'hotels': thehotel, 'reviews':reviews,'user':current_user}
+    context = {'hotels': thehotel, 'reviews':reviews,'user':current_user,'rooms':rooms}
     return render(request, 'HotelApp/hoteldetails.html', context)
 
 
@@ -68,5 +72,3 @@ class reviewDeleteView(DeleteView):
         hotelid = hotel.id
         url = reverse('HotelApp:hoteldetails', args=[hotelid])
         return url
-
-    
