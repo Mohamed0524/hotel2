@@ -26,7 +26,7 @@
 <hr />
 {% for photo in Photos|slice:"1:"%}
   <img class="img-thumbnail"src="{{MEDIA_URL}}{{photo.path}}" />
-  <a class="btn btn btn-danger pull-right text-center" href="">Delete</a>
+  <a class="btn btn btn-danger pull-right text-center" href="{% url 'ManageHotels:deletephoto' photo.id %}">Delete</a>
   <br />
   <hr />
   {%endfor%}

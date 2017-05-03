@@ -20,7 +20,7 @@ urlpatterns = [
      url(r'^yourhotels/(?P<id>[0-9]+)/upload$', views.BasicUploadView.as_view(), name='basicupload'),
      url(r'^yourhotels/(?P<id>[0-9]+)/photodash$', views.showphotodash, name='photodash'),
      url(r'^yourhotels/(?P<id>[0-9]+)/thumbnail$', views.editThumbnail, name='editThumb'),
-
+     url(r'^yourhotels/(?P<id>[0-9]+)/deletephoto$', views.deletePhoto, name='deletephoto'),
 
 
 

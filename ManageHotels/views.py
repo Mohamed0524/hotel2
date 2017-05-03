@@ -55,6 +55,12 @@ def editThumbnail(request,id):
         thumbnail.save()
         link = reverse('ManageHotels:photodash', args=[id])
         return HttpResponseRedirect(link)
+def deletePhoto(request,id):
+       photo = Photo.objects.get(id = id)
+       hotel = photo.hotel
+       photo.delete()
+       link = reverse('ManageHotels:photodash', args=[hotel.id])
+       return HttpResponseRedirect(link)
 
 class HotelCreateView(CreateView):
 
