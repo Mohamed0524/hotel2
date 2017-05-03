@@ -29,7 +29,7 @@
               <td>{{proposal.Vision}}</td>
 
                   <td><a class="btn btn-success pull-right" href="{% url 'Authorize:acceptproposal' proposal.id  %}">Accept</a></td>
-                  <td><a class="btn btn-danger pull-right" href="/proposal/{{proposal.id}}/decline">Refuse</a></td>
+                  <td><a class="btn btn-danger pull-right" href="{% url 'Authorize:declineproposal' proposal.id  %}">Refuse</a></td>
 
 
             </tr>

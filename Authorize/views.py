@@ -54,6 +54,11 @@ def acceptProposals(request,id):
     proposal.delete()
     link = reverse('Authorize:showproposals')
     return HttpResponseRedirect(link)
+def declineProposals(request,id):
+    proposal = Proposal.objects.get(id = id)
+    proposal.delete()
+    link = reverse('Authorize:showproposals')
+    return HttpResponseRedirect(link)
 
 def checkstatus(request):
     proposal_list = Proposal.objects.filter(user = request.user)
