@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'HotelApp',
     'ManageHotels',
+    'Authorize',
     'registration',
 ]
 
@@ -133,9 +134,9 @@ STATIC_URL = '/static/'
 #Registration settings
 REGISTRATION_OPEN = True
 ACCOUNT_ACTIVATION_DAYS = 7
-REGISTRATION_AUTO_LOGIN = True
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/HotelApp/'
-
+REGISTRATION_AUTO_LOGIN = True
+LOGIN_REDIRECT_URL = '/Authorize/'
+REGISTRATION_EMAIL_HTML = False
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
