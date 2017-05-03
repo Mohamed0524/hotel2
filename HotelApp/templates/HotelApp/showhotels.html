@@ -11,7 +11,7 @@
 
       <div class="card">
 
-        <img class="card-img-top" src="{% static "/images/imag.jpg" %}" alt="Card image"> <!--Hotel thumbnail path -->
+        <img class="card-img-top" src="{{MEDIA_URL}}{{Hotel.thumbnail.path}}" alt="Card image"> <!--Hotel thumbnail path -->
 
         <div class="card-block">
           <h4 class="card-Title">{{ Hotel.Name}}</h4>

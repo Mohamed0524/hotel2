@@ -9,12 +9,15 @@ from django.contrib.auth.decorators import login_required
 from django import forms
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.core.urlresolvers import reverse,reverse_lazy
+from ManageHotels.models import Photo
 
 def home(request):
     return render(request,'HotelApp/home.html')
 @login_required
 def hotelindex(request):
     hotels_list = Hotels.objects.all()
+    for hotel in hotels_list:
+        hotel.thumbnail = Photo.objects.filter(hotel=hotel).first()
     context = {'Hotels': hotels_list}
     return render(request,'HotelApp/showhotels.html',context)
 

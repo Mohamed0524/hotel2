@@ -49,7 +49,8 @@ def editThumbnail(request,id):
         fs = FileSystemStorage()
         filename = fs.save(thumb.name,thumb)
         name = thumb.name
-        photos = Photo.objects.all()
+        thehotel = Hotels.objects.get(id = id)
+        photos = Photo.objects.filter(hotel =thehotel)
         thumbnail = photos.first()
         thumbnail.path = name
         thumbnail.save()
