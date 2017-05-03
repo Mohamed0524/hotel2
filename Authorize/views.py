@@ -54,3 +54,9 @@ def acceptProposals(request,id):
     proposal.delete()
     link = reverse('Authorize:showproposals')
     return HttpResponseRedirect(link)
+
+def checkstatus(request):
+    proposal_list = Proposal.objects.filter(user = request.user)
+
+    context = {'proposal': proposal_list}
+    return render(request, 'Authorize/checkstatus.html', context)

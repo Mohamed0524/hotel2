@@ -10,4 +10,5 @@ urlpatterns = [
      url(r'^(?P<pk>[0-9]+)/reviews/edit$', views.reviewUpdateView.as_view(), name='editreview'),
      url(r'^(?P<pk>[0-9]+)/reviews/delete$', views.reviewDeleteView.as_view(), name='deletereview'),
      url(r'^partner/apply$', views.partnerCreateView.as_view(), name='newproposal'),
+     
 ]

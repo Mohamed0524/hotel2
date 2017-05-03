@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+
+        {% if proposal %}
+
+          <p>
+              {{user.username}} -  You're proposal is currently being reviewed , we aim to get back to you shortly.
+          </p>
+
+
+
+        {% else %}
+        <p>
+          {{user.username}} you have no pending proposals.
+        </p>
+
+        {% endif %}
+
+ <a href="{% url 'HotelApp:userDash'  %}" class="btn">Back to Dashboard.</a>
+
+{% endblock %}

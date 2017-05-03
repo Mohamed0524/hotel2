@@ -8,7 +8,7 @@ from HotelProject import settings
 
 class MyRegistrationView(RegistrationView):
     def get_sucess_url(self,user):
-        return '/'
+        return '/HotelApp/dashboard/'
 
 urlpatterns = [
     url(r'^$', views.home , name = 'home'),
