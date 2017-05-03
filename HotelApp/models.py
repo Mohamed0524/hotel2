@@ -47,3 +47,15 @@ class Room(models.Model):
 
     def __str__(self):
          return self.comment
+
+class Proposal(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    CompanyName = models.CharField(max_length  = 255)
+    CompanyEmail = models.EmailField(max_length  = 254)
+    HQAddress = models.CharField(max_length  = 255)
+    Vision = models.TextField(max_length  = 400)
+    class Meta:
+        verbose_name_plural = 'Proposal'
+
+    def __str__(self):
+         return self.CompanyName

@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <h3 class="text-center">All Partners</h3>
+                <!-- Displays a list of all the partners of Check-In.com and displays a Remove Button next to each -->
+                    {% for partner in partners%}
+                      <li class="list-group-item text-center">
+                        {{partner.CompanyName}} <a class="btn btn-sm btn-danger pull-right" href="{% url 'Authorize:removepartner' partner.id %}">Remove</a>
+                      </li>
+
+                    {% endfor %}
+
+              </div>
+
+              <a href="{% url 'Authorize:admindash'  %}" class="btn btn-info">Back to Dashboard.</a>
+
+          </div>
+      </div>
+  </div>
+
+{% endblock %}

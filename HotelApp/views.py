@@ -10,9 +10,13 @@ from django import forms
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.core.urlresolvers import reverse,reverse_lazy
 from ManageHotels.models import Photo
+from HotelApp.models import Proposal
 
 def home(request):
     return render(request,'HotelApp/home.html')
+
+def userDash(request):
+    return render(request,'HotelApp/userDash.html')
 @login_required
 def hotelindex(request):
     hotels_list = Hotels.objects.all()
@@ -75,3 +79,14 @@ class reviewDeleteView(DeleteView):
         hotelid = hotel.id
         url = reverse('HotelApp:hoteldetails', args=[hotelid])
         return url
+class partnerCreateView(CreateView):
+
+    model = Proposal
+    fields = ['CompanyName','CompanyEmail','HQAddress','Vision']
+    #success_url = '/hotels/'
+    def get_success_url(self):
+        url = reverse('HotelApp:userDash')
+        return url
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(partnerCreateView, self).form_valid(form)

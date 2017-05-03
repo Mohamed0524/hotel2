@@ -15,9 +15,12 @@ Current Features:
 7. Add and delete images & edit hotels
 8. Edit and delete rooms
 9. Delete Hotels
+10. User can send Partner Proposal to admin
+11. Admin can Accept or Decline Partner proposal
+12. Authorization , admin / partner/ user can access different parts of the site.
+
 
 Upcoming Features:
-> Authorization , Admins / Partners and users can access different parts of the website
 > Hotels are owned by Partners
 > Advanced Search for hotels
 > Users can book reservations
