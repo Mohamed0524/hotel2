@@ -25,7 +25,20 @@ def showProposals(request):
     proposal_list = Proposal.objects.all()
     context = {'proposals': proposal_list}
     return render(request, 'Authorize/proposals.html', context)
+def showPartners(request):
+    partner_list = Partners.objects.all()
+    context = {'partners': partner_list}
+    return render(request, 'Authorize/partners.html', context)
+def removePartner(request,id):
+    partner = Partners.objects.get(id = id)
+    userid = partner.userID
+    role = UserRole.objects.get(user = userid)
+    role.roleid = 3
+    role.save()
+    partner.delete()
 
+    link = reverse('Authorize:showpartners')
+    return HttpResponseRedirect(link)
 def acceptProposals(request,id):
     proposal = Proposal.objects.get(id = id)
     user = proposal.user
