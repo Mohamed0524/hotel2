@@ -1,0 +1,38 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<h1>Photos:</h1>
+<br />
+
+ {% if Thumbnail %}
+  <form method="POST" action="{% url 'ManageHotels:editThumb' Hotel.id %}" enctype="multipart/form-data">
+    {% csrf_token %}
+  <div class="form-group">
+      <label for="imagebox" class="">Thumbnail:</label>
+        <p>Current Thumbnail: {{Thumbnail.path}}</p>
+      <div class="col-10">
+
+      <input  name="thumb" type="file" value=" {{Thumbnail.path}}" id="imagebox">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Edit Thumbnail</button>
+
+</form>
+{% else %}
+<p> Please Upload a Photo to represent this hotels Thumbnail</p>
+{% endif %}
+
+<hr />
+{% for photo in Photos|slice:"1:"%}
+  <img class="img-thumbnail"src="{{MEDIA_URL}}{{photo.path}}" />
+  <a class="btn btn btn-danger pull-right text-center" href="">Delete</a>
+  <br />
+  <hr />
+  {%endfor%}
+
+  <a href="{% url 'ManageHotels:basicupload' Hotel.id %}" class="btn btn-primary">Add Images</a>
+  <a href="{% url 'ManageHotels:showHotelDash' Hotel.id %}" class="btn pull-right">Back</a>
+
+
+{% endblock %}

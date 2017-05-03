@@ -1,0 +1,63 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+  <div class="panel-body">
+  <button type="button" class="btn btn-primary js-upload-photos">
+    <span class="glyphicon glyphicon-cloud-upload"></span> Upload Photos
+  </button>
+
+  <input id="fileupload" type="file" name="path" multiple style="display:none;" data-url="{% url 'ManageHotels:basicupload' hotelid  %}"
+  data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+
+  <table id="gallery" class="table table-bordered">
+    <thead>
+
+      <tr>
+        <th>
+          Uploaded Photos:
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for photo in photos %}
+        <tr>
+          <td>
+            <a href="{{ photo.path.url }}">{{ photo.path.name }}</a>
+          </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'ManageHotels:photodash' hotelid %}" class="btn pull-right">Back</a>
+
+  </div>
+
+  <div class="modal fade" id="modal-progress" data-backdrop="static" datakeyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Uploading...</h4>
+        </div>
+        <div class="modal-body">
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 0%;">
+              0%
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+{% block scripts %}
+<script
+      src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+      integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+      crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.iframe-transport/1.0.1/jquery.iframe-transport.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.18.0/js/jquery.fileupload.js"></script>
+<script src="{% static "/js/basic-upload.js" %}"></script>
+
+
+{% endblock%}

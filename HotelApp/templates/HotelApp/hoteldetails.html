@@ -99,7 +99,7 @@
                   <td><a class="btn btn-default pull-right btn-sm" href="{% url 'HotelApp:editreview' review.id %}">Edit Review</a></td>
 
                   <td>
-                    <form action="{% url 'HotelApp:deletereview' review.id %}" method="post">
+                    <form action="{% url 'HotelApp:deletereview' review.id %}" method="POST" enctype="multipart/form-data">
                       {% csrf_token %}
 
                         <button type="submit" class="btn btn-danger pull-right btn-sm">Delete Review</button>

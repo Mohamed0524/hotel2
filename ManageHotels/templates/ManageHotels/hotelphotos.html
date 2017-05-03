@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+  <form id="dropzone" class="dropzone" action="{% url 'ManageHotels:uploadPhoto' hotelid %}" method="POST">
+    {%csrf_token%}
+
+  </form>
+  <button id="submit-all">
+    Submit files
+  </button>
+
+{%endblock%}
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
+<script type="text/javascript">
+
+var DrZone = new Dropzone(document.getElementById("dropzone"),{
+
+  autoProcessQueue:false,
+  init: function(){
+    var submitButton = document.querySelector("#submit-all")
+    myDropzone = this;
+    submitButton.addEventListener("click",function(){
+      myDropzone.processQueue()
+    })
+  }
+
+});
+
+
+
+
+
+
+
+</script>
+{%endblock%}
