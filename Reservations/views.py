@@ -61,3 +61,14 @@ def storeBooking(request,hotelid,roomid,checkin,checkout,totalcost):
     else:
         url = reverse('HotelApp:userDash')
         return url
+
+def mybookings(request):
+    bookings = Reservation.objects.filter(user = request.user)
+    context = {'bookings':bookings}
+    return render(request, 'Reservations/mybookings.html', context)
+
+def cancelbooking(request,id):
+    booking = Reservation.objects.get(id = id)
+    booking.delete()
+    link = reverse('Reservations:viewbookings')
+    return HttpResponseRedirect(link)

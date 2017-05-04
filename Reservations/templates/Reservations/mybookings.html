@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+<a class="btn btn-default pull-right" href="{% url 'HotelApp:userDash' %}">Back</a>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 ">
+
+
+
+      <h4>My Bookings:</h4>
+
+      <br />
+<!-- Loads all of the Current users reservations in a list and displays all  the details -->
+
+      {%for booking in bookings%}
+
+
+
+
+
+      <a class="btn btn-sm btn-danger pull-right" href="{% url 'Reservations:cancelbooking' booking.id %}">Cancel</a>
+      <a  class="btn btn-sm btn-default pull-right "href="/reservations/reservationid/pdf">Download PDF</a>
+        <h5><u> {{booking.hotel.Name}}</u></h5>
+        <p><mark>Room Type :</mark> {{booking.room.RoomType}}.  </p>
+        <p><mark>Guest Name :</mark>  {{booking.guestFirstName}} {{booking.guestLastName}}.  </p>
+        <p><mark>Check-in Date :</mark> {{booking.CheckIn}}.  </p>
+        <p><mark>Check-out Date:</mark> {{booking.CheckOut}}.  </p>
+        <p><mark>Total Price :</mark> £{{booking.totalPrice}}.  </p>
+
+
+        <hr />
+      {%endfor%}
+
+    </div>
+  </div>
+  {% endblock %}

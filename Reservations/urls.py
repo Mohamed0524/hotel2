@@ -6,5 +6,7 @@ urlpatterns = [
     url(r'^book/(?P<hotelid>[0-9]+)/(?P<roomid>[0-9]+)$', views.bookRoom, name='bookroom'),
     url(r"^book/new/(?P<roomid>[0-9]+)/(?P<hotelid>[0-9]+)/(?P<checkin>(\d{4}-\d{2}-\d{2}))/(?P<checkout>(\d{4}-\d{2}-\d{2}))/(?P<totalcost>[0-9]+)$"
     , views.storeBooking, name='newbooking'),
+    url(r'^mybookings/$', views.mybookings, name='viewbookings'),
+    url(r'^mybookings/cancel/(?P<id>[0-9]+)$', views.cancelbooking, name='cancelbooking'),
 
 ]
