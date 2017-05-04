@@ -71,6 +71,12 @@
         <p><mark>View :</mark> {{room.View}}.</p>
         <p><mark>Price :</mark> £{{room.Price}}</p>
         <p><b>Rooms Left: </b>{{room.spaceleft}}</p>
+
+        {% if room.spaceleft > 0 %}
+        
+        <a href="{% url 'Reservations:bookroom' room.id hotels.id %}" class="btn btn-success">Book</a>
+        <hr />
+        {% endif%}
        {% endfor %}
       {%endif%}
 

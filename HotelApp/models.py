@@ -48,7 +48,7 @@ class Room(models.Model):
         verbose_name_plural = 'Room'
 
     def __str__(self):
-         return self.comment
+         return self.RoomType
 
 class Proposal(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)

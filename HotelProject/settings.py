@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'HotelApp',
     'ManageHotels',
     'Authorize',
+    'Reservations',
     'registration',
 ]
 

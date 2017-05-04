@@ -41,6 +41,15 @@ def hoteldetails(request, pk):
     reviews = Review.objects.filter(hotel=thehotel)
     rooms = Room.objects.filter(hotel=thehotel)
     photos = Photo.objects.filter(hotel=thehotel)
+
+
+
+
+
+
+
+
+
     for room in rooms:
         room.spaceleft = 1
     current_user = request.user
@@ -117,11 +126,11 @@ class hotelSearch(View):
             hotels_list = Hotels.objects.filter(Q(City__contains=Searchterm) | Q(Country__contains=Searchterm)
             | Q(Address__contains=Searchterm)).filter(room__Capacity__gte = NumTravelers)
         Range = request.POST.get("daterange")
-        Rangesplit = Range.split('to')
+        Rangesplit = Range.split(' to ')
         CheckIn = Rangesplit[0]
         CheckOut = Rangesplit[1]
         request.session['checkin'] = CheckIn
-        request.session['CheckOut'] = CheckOut
+        request.session['checkout'] = CheckOut
         for hotel in hotels_list:
             hotel.thumbnail = Photo.objects.filter(hotel=hotel).first()
         context = {'hotels':hotels_list}
