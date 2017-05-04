@@ -13,7 +13,14 @@
           <small>{{ hotels.Country}} |  {{ hotels.City}}</small>
       </div>
       <!-- Slideshow of all the Hotels Photos -->
+      <center>
 
+        <div class="autoplay">
+          {%for Photo in Photos|slice:"1:"%}
+          <div><img  src="{{MEDIA_URL}}{{Photo.path}}"></div>
+          {%endfor%}
+        </div>
+    </center>
       <!-- End Slideshow -->
 
     <!-- Information Box , Hotel details ( Address, Tel etc ) & Hotel Rating-->
@@ -131,3 +138,26 @@
 {% endblock %}
 
 <!-- The scripts for the page are included below , Slideshow / Rating -->
+{% block scripts %}
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+  <script>
+
+      $('.autoplay').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2500,
+        arrows:false,
+        infinite: true,
+        speed: 500,
+        fade: true,
+        cssEase: 'linear'
+
+      });
+
+  </script>
+
+
+
+{% endblock %}

@@ -36,10 +36,11 @@ def hoteldetails(request, pk):
     thehotel = Hotels.objects.get(id = pk)
     reviews = Review.objects.filter(hotel=thehotel)
     rooms = Room.objects.filter(hotel=thehotel)
+    photos = Photo.objects.filter(hotel=thehotel)
     for room in rooms:
         room.spaceleft = 1
     current_user = request.user
-    context = {'hotels': thehotel, 'reviews':reviews,'user':current_user,'rooms':rooms}
+    context = {'hotels': thehotel, 'reviews':reviews,'user':current_user,'rooms':rooms,'Photos':photos}
     return render(request, 'HotelApp/hoteldetails.html', context)
 
 
