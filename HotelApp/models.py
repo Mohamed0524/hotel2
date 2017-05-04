@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from Authorize.models import Partners
 class Hotels(models.Model):
     Name = models.CharField(max_length  = 255)
     Address = models.CharField(max_length  = 255)
@@ -11,6 +12,7 @@ class Hotels(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now=True)
     Description = models.CharField(max_length  = 255)
+    Partner = models.ForeignKey(Partners,on_delete=models.CASCADE)
     class Meta:
         verbose_name_plural = 'Hotels'
 

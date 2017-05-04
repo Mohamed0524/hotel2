@@ -15,6 +15,7 @@ from ManageHotels.models import Photo
 from django.http import JsonResponse
 from django.views import View
 from django.core.files.storage import FileSystemStorage
+from Authorize.models import Partners
 
 
 def home(request):
@@ -22,7 +23,9 @@ def home(request):
 
 @login_required
 def showhotels(request):
-    hotels_list = Hotels.objects.all()
+    user = request.user
+    thepartner= Partners.objects.get(userID = user)
+    hotels_list = Hotels.objects.filter(Partner=thepartner)
     context = {'Hotels': hotels_list}
     return render(request,'ManageHotels/yourhotels.html',context)
 
@@ -73,6 +76,9 @@ class HotelCreateView(CreateView):
         url = reverse('ManageHotels:home')
         return url
     def form_valid(self, form):
+        user = self.request.user
+        thepartner= Partners.objects.get(userID = user)
+        form.instance.Partner_id = thepartner.id
         return super(HotelCreateView, self).form_valid(form)
 class HotelUpdateView(UpdateView):
 
