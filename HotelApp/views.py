@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render
 from HotelApp.models import Hotels
 from HotelApp.models import Review
@@ -11,6 +11,7 @@ from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.core.urlresolvers import reverse,reverse_lazy
 from ManageHotels.models import Photo
 from HotelApp.models import Proposal
+from django.core.urlresolvers import reverse
 
 def home(request):
     return render(request,'HotelApp/home.html')
@@ -25,7 +26,9 @@ def hotelindex(request):
     context = {'Hotels': hotels_list}
     return render(request,'HotelApp/showhotels.html',context)
 
-
+def regcomplete(request):
+        link = reverse('HotelApp:userDash')
+        return HttpResponseRedirect(link)
 
 def hoteldetails(request, pk):
 
