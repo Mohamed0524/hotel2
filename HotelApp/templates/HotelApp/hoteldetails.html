@@ -7,7 +7,7 @@
     <!-- Displays the Hotels Name, Country and City and Company Name -->
       <div class="page-header">
 
-          <h2>{{hotels.Name}} <small class="text-muted">- <u>Partner Here</u></small>
+          <h2>{{hotels.Name}} <small class="text-muted">- <u>{{hotels.Partner.CompanyName}}</u></small>
 
           </h2>
           <small>{{ hotels.Country}} |  {{ hotels.City}}</small>
@@ -140,10 +140,14 @@
 <!-- The scripts for the page are included below , Slideshow / Rating -->
 {% block scripts %}
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+  <script src="{% static "js/slick.js" %}"></script>
   <script>
 
-      $('.autoplay').slick({
+      $('.autoplay').on('init',function(slick){
+        console.log('fired');
+        $('.autoplay').fadeIn(300);
+      })
+      .slick({
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
@@ -152,7 +156,8 @@
         infinite: true,
         speed: 500,
         fade: true,
-        cssEase: 'linear'
+        cssEase: 'linear',
+        lazyLoad:'ondemand'
 
       });
 

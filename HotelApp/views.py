@@ -12,6 +12,10 @@ from django.core.urlresolvers import reverse,reverse_lazy
 from ManageHotels.models import Photo
 from HotelApp.models import Proposal
 from django.core.urlresolvers import reverse
+from django.views import View
+from django.db.models import Q
+
+
 
 def home(request):
     return render(request,'HotelApp/home.html')
@@ -94,3 +98,31 @@ class partnerCreateView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(partnerCreateView, self).form_valid(form)
+
+class hotelSearch(View):
+    def get(self,request):
+        return render(request, 'HotelApp/search.html')
+    def post(self,request):
+        Searchterm = request.POST.get("searchterm").title()
+        NumTravelers = request.POST.get("numtravelers")
+
+        if not Searchterm and not NumTravelers:
+            hotels_list = Hotels.objects.all()
+        elif Searchterm and not NumTravelers:
+            hotels_list = Hotels.objects.filter(Q(City__contains=Searchterm) | Q(Country__contains=Searchterm)
+            | Q(Address__contains=Searchterm))
+        elif NumTravelers and not Searchterm:
+            hotels_list = Hotels.objects.filter(room__Capacity__gte =  NumTravelers)
+        elif Searchterm and NumTravelers:
+            hotels_list = Hotels.objects.filter(Q(City__contains=Searchterm) | Q(Country__contains=Searchterm)
+            | Q(Address__contains=Searchterm)).filter(room__Capacity__gte = NumTravelers)
+        Range = request.POST.get("daterange")
+        Rangesplit = Range.split('to')
+        CheckIn = Rangesplit[0]
+        CheckOut = Rangesplit[1]
+        request.session['checkin'] = CheckIn
+        request.session['CheckOut'] = CheckOut
+        for hotel in hotels_list:
+            hotel.thumbnail = Photo.objects.filter(hotel=hotel).first()
+        context = {'hotels':hotels_list}
+        return render(request, 'HotelApp/showhotels.html', context)
