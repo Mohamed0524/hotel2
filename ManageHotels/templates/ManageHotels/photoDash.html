@@ -32,7 +32,7 @@
   {%endfor%}
 
   <a href="{% url 'ManageHotels:basicupload' Hotel.id %}" class="btn btn-primary">Add Images</a>
-  <a href="{% url 'ManageHotels:showHotelDash' Hotel.id %}" class="btn pull-right">Back</a>
+  <a href="{% url 'ManageHotels:managehotel' Hotel.id %}" class="btn pull-right">Back</a>
 
 
 {% endblock %}

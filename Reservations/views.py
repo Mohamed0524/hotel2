@@ -81,5 +81,12 @@ def mybookings(request):
 def cancelbooking(request,id):
     booking = Reservation.objects.get(id = id)
     booking.delete()
-    link = reverse('Reservations:viewbookings')
-    return HttpResponseRedirect(link)
+    Role = request.user.userrole
+    if Role.id == 3:
+
+        link = reverse('Reservations:viewbookings')
+        return HttpResponseRedirect(link)
+    elif Role.id == 4:
+        hotelid = booking.hotel.id
+        link = reverse('ManageHotels:managehotel', args=[hotelid])
+        return HttpResponseRedirect(link)

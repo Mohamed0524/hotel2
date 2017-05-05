@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+  <div class="panel-body">
+<!-- List All the Hotels belonging to the Signed in partner , Linking to the Hotel Dashboard of each Hotel -->
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-6 col-md-4">
+        <a href="{% url 'ManageHotels:editHotel' Hotel.id %}" class="thumbnail">
+          <img src="{% static "/images/new.png" %}" alt="..." />
+        </a>
+        <p class="text-center">
+          <b>Edit Hotel {{Hotel.id}}</b>
+        </p>
+      </div>
+      <div class="col-xs-6 col-md-4">
+        <a href="{% url 'ManageHotels:showRoomsDash' Hotel.id %}" class="thumbnail center-block">
+          <img src="{% static "/images/room.png" %}" alt="..." />
+        </a>
+        <p class="text-center">
+          <b>Rooms</b>
+        </p>
+      </div>
+      <div class="col-xs-6 col-md-4">
+        <form action="{% url 'ManageHotels:deleteHotel' Hotel.id %}" method="post">
+            {% csrf_token %}
+        <button type="submit" class="thumbnail">
+          <img src="{% static "/images/delete.png" %}" alt="..." />
+        </button>
+      </form>
+        <p class="text-center">
+          <b>Delete Hotel</b>
+        </p>
+      </div>
+  </div>
+
+
+    </div>
+
+      <hr>
+      <a class="btn btn-default pull-right" href="{% url 'ManageHotels:home' %}">Back</a>
+  </div>
+
+{% endblock %}

@@ -16,6 +16,7 @@ from django.http import JsonResponse
 from django.views import View
 from django.core.files.storage import FileSystemStorage
 from Authorize.models import Partners
+from Reservations.models import Reservation
 
 
 def home(request):
@@ -28,11 +29,19 @@ def showhotels(request):
     hotels_list = Hotels.objects.filter(Partner=thepartner)
     context = {'Hotels': hotels_list}
     return render(request,'ManageHotels/yourhotels.html',context)
-
+def showreservations(request,pk):
+    thehotel = Hotels.objects.get(id = pk)
+    Bookings = Reservation.objects.filter(hotel= thehotel)
+    context = {'reservations':Bookings,'hotel':thehotel}
+    return render(request,'ManageHotels/viewbookings.html',context)
 def showdashboard(request,pk):
     thehotel = Hotels.objects.get(id = pk)
     context = {'Hotel': thehotel}
     return render(request,'ManageHotels/hoteldash.html',context)
+def managehotel(request,pk):
+    thehotel = Hotels.objects.get(id = pk)
+    context = {'Hotel': thehotel}
+    return render(request,'ManageHotels/managehotel.html',context)
 
 def showRoomsDash(request,pk):
     thehotel = Hotels.objects.get(id = pk)

@@ -6,7 +6,7 @@
       <div class="list-group">
 
           {%for hotel in Hotels%}
-            <a href="{% url 'ManageHotels:showHotelDash' hotel.id %}" class="list-group-item">{{hotel.Name}}</a>
+            <a href="{% url 'ManageHotels:hoteldash' hotel.id %}" class="list-group-item">{{hotel.Name}}</a>
 
           {% endfor %}
 
