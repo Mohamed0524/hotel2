@@ -12,7 +12,18 @@ from django.db.models import Q
 from django.core.signing import Signer
 import datetime
 from Reservations.models import Reservation
-# Create your views here.
+from wkhtmltopdf.views import PDFTemplateView
+class MyPDF(PDFTemplateView):
+    def get_context_data(self,**kwargs):
+        context = super(MyPDF, self).get_context_data(**kwargs)
+        booking = Reservation.objects.get(id= self.kwargs['id'])
+        booking.photo = Photo.objects.filter(hotel = booking.hotel).first()
+        context['booking'] = booking
+
+        return context
+
+
+
 def bookRoom(request,hotelid,roomid):
     FirstDate = request.session['checkin']
     SecDate =  request.session['checkout']

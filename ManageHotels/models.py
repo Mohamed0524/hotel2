@@ -12,4 +12,4 @@ class Photo(models.Model):
         verbose_name_plural = 'Photo'
 
     def __str__(self):
-         return self.path
+         return self.hotel.Name

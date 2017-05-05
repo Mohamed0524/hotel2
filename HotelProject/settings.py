@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'HotelApp',
     'ManageHotels',
+    'wkhtmltopdf',
     'Authorize',
     'Reservations',
     'registration',
@@ -60,7 +61,7 @@ ROOT_URLCONF = 'HotelProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,7 +132,7 @@ USE_TZ = True
 
 STATICFILES_DIRS = [STATIC_DIR,]
 STATIC_URL = '/static/'
-
+STATIC_ROOT = 'static_cdn'
 #Registration settings
 REGISTRATION_OPEN = True
 ACCOUNT_ACTIVATION_DAYS = 7
