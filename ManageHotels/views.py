@@ -210,5 +210,5 @@ class ChartData(APIView):
 
 
         data = {"Countries":HotelCountries,"Count":count,"Hotels":HotelNames,"Bookings":bookings,"Money":money}
-        print(money)
+        print(PartnerHotel)
         return Response(data)

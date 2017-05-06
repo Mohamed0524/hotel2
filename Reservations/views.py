@@ -33,8 +33,7 @@ def bookRoom(request,hotelid,roomid):
     timedeltaSum = Checkout - Checkin
     StayDuration = timedeltaSum.days
 
-    del request.session['checkin']
-    del request.session['checkout']
+
 
     Hotel = Hotels.objects.get(id= hotelid)
     theRoom = Room.objects.get(id = roomid)
@@ -66,6 +65,8 @@ def storeBooking(request,hotelid,roomid,checkin,checkout,totalcost):
         newReservation.CheckOut = checkout
         newReservation.totalPrice = cost
         newReservation.save()
+        del request.session['checkin']
+        del request.session['checkout']
         link = reverse('HotelApp:userDash')
         return HttpResponseRedirect(link)
 

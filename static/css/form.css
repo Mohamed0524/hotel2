@@ -20,3 +20,6 @@ input {
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s !important;
 
 }
+.ratingstar {
+  font-size: 25px !important;
+}

@@ -1,4 +1,5 @@
 {% load staticfiles %}
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,7 +19,7 @@
     <span class="text-danger small">{{field.errors}}</span>
   </div>
   <label class="control-label col-sm-2">{{ field.label_tag}}</label>
-  <div class="col-sm-10">
+  <div class="col-sm-10"  id="rating">
 
     {{ field }}
   </div>

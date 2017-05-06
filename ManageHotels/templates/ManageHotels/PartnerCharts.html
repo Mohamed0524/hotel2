@@ -3,6 +3,7 @@
 
 
 {% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.2/randomColor.js"></script>
 <script>
 var data = 'chart/data'
 var labels1 = [];
@@ -18,7 +19,8 @@ $.ajax({
     data3 = chartdata.Money
     var ctx = document.getElementById("myChart");
     var ctx2 = document.getElementById("myChart2");
-    var ctx4 = document.getElementById("myChart4");
+    var ctx4 = document.getElementById("myChart4").getContext("2d");
+
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -26,7 +28,10 @@ $.ajax({
           datasets: [{
                 label: 'Hotels per country',
                 data: data1,
-                backgroundColor: ['#7a1212','#c97676'],
+                backgroundColor: randomColor({
+                                               count: labels2.length,
+                                               hue: 'orange'
+                                            }),
                 borderColor: [
                     '#f7f6f4','#f7f6f4'],
                 borderWidth: 3
@@ -53,7 +58,10 @@ $.ajax({
              datasets: [{
                    label: 'Bookings Per Hotel',
                    data: data2,
-                   backgroundColor: ['#579380','#577f93'],
+                   backgroundColor: randomColor({
+                                                  count: labels2.length,
+                                                  hue: 'blue'
+                                               }),
 
                }]
               },
@@ -78,11 +86,16 @@ $.ajax({
 
                       data: data3,
 
-                      backgroundColor: ['#a86400','#a8700'],
+                      backgroundColor: randomColor({
+                                                     count: labels2.length,
+                                                     hue: 'red'
+                                                  }),
 
-                      borderColor: [
-                          '#a86400','#a8700'],
-                      borderWidth: 3,
+                      borderColor:randomColor({
+                                                     count: labels2.length,
+                                                     hue: 'red'
+                                                  }),
+                      borderWidth: 2,
                       label: 'Yearly Earnings £'
                     }]
                    },
@@ -96,18 +109,10 @@ $.ajax({
                                  }]
                               }
                             }
-               });
+                          })
+
     }
   })
-
-
-
-
-
-
-
-
-
 
 
 

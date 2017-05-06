@@ -20,7 +20,6 @@ class Hotels(models.Model):
         return reverse('hoteldetails', kwargs={'pk': self.pk})
     def __str__(self):
          return self.Name
-
 class Review(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     hotel = models.ForeignKey(Hotels,on_delete=models.CASCADE)

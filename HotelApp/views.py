@@ -16,6 +16,7 @@ from django.views import View
 from django.db.models import Q
 from Reservations.models import Reservation
 import random
+from django.db.models import Sum
 
 
 
@@ -71,7 +72,33 @@ def hoteldetails(request, pk):
             Roomsleft = Roomsavailable - count
             room.spaceleft = Roomsleft
 
-    context = {'hotels': thehotel, 'reviews':reviews,'user':current_user,'rooms':rooms,'Photos':photos,'Recommended':Recommendation}
+    #work out rating
+    NumReviews = Reservation.objects.filter(hotel = thehotel).count()
+    totalrating = Review.objects.filter(hotel = thehotel).aggregate(sum=Sum('rating'))['sum']
+    if totalrating:
+        Rating = round(totalrating/NumReviews)
+    else:
+        Rating = None
+
+    if Rating:        
+        if Rating >= 80:
+            starpath = '5star.png'
+        elif Rating >=  60:
+            starpath = '4star.png'
+        elif Rating >= 40:
+            starpath = '3star.png'
+        elif Rating >= 20:
+            starpath = '2star.png'
+        elif Rating < 20:
+            starpath = '1star.png'
+
+    if Rating == None:
+        starpath = 'NR.png'
+
+
+
+
+    context = {'hotels': thehotel, 'reviews':reviews,'user':current_user,'rooms':rooms,'Photos':photos,'Recommended':Recommendation,'Rating':Rating,'starpath':starpath}
     return render(request, 'HotelApp/hoteldetails.html', context)
 
 

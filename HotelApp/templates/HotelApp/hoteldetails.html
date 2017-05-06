@@ -36,8 +36,12 @@
           <dl class="row">
               <dt class="col-sm-5">Check-In User Rating:</dt>
                 <dd class="col-sm-7">
-                    <img src="" /> <!-- Star path-->
-                    <b>Rating%</b>
+                    <img src="{%static starpath %}" /> <!-- Star path-->
+                    {% if Rating %}
+                    <b>{{Rating}}%</b>
+                    {% else %}
+                    <b>Not Rated</b>
+                    {% endif %}
                 </dd>
               <dt class="col-sm-5">Address:</dt>
                 <dd class="col sm-7">
