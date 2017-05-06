@@ -17,8 +17,9 @@
                       <!--  partner id in link -->
                       <a href="{% url 'ManageHotels:showhotel'  %}" class="list-group-item">View Your Hotels</a>
                       <a href="newhotel" class="list-group-item">List a New Hotel</a>
-                    
+                      {% if NumHotel > 0%}
                         <a href="{% url 'ManageHotels:partnercharts' Partner.id %}" class="list-group-item">View Statistics</a>
+                      {% endif%}
 
 
 

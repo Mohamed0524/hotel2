@@ -23,14 +23,15 @@ import datetime
 from django.db.models import Sum
 
 
-
 def home(request):
     user = request.user
     partner = user.partners
+    PartnerHotel = Hotels.objects.filter(Partner_id = partner.id).count()
     print (partner.id)
     if partner:
-        context = {'Partner': partner}
-        return render(request,'ManageHotels/home.html',context)
+            context = {'Partner': partner,'NumHotel':PartnerHotel}
+            return render(request,'ManageHotels/home.html',context)
+
     else:
         return HttpResponse("Error")
 
