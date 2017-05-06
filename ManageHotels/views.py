@@ -92,7 +92,7 @@ def deletePhoto(request,id):
 class HotelCreateView(CreateView):
 
     model = Hotels
-    fields = ['Name','Address','City','Country','TelephoneNumber','ImagePath','Description']
+    fields = ['Name','Address','City','Country','TelephoneNumber','Description']
     def get_success_url(self):
         #hotelid = self.kwargs['id']
         #url = reverse('HotelApp:hoteldetails', args=[hotelid])
@@ -106,7 +106,7 @@ class HotelCreateView(CreateView):
 class HotelUpdateView(UpdateView):
 
     model = Hotels
-    fields = ['Name','Address','City','Country','TelephoneNumber','ImagePath','Description']
+    fields = ['Name','Address','City','Country','TelephoneNumber','Description']
     def get_success_url(self):
         hotelid = self.kwargs['pk']
         url = reverse('ManageHotels:photodash', args=[hotelid])
@@ -125,7 +125,7 @@ class HotelDeleteView(DeleteView):
 class RoomCreateView(CreateView):
 
     model = Room
-    fields = ['RoomType','Capacity','BedOption','Price','View']
+    fields = ['RoomType','Capacity','BedOption','Price','View','TotalRooms']
     def get_success_url(self):
         hotelid = self.kwargs['pk']
         url = reverse('ManageHotels:showRoomsDash', args=[hotelid])

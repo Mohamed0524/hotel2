@@ -45,6 +45,7 @@ def hoteldetails(request, pk):
     photos = Photo.objects.filter(hotel=thehotel)
     FirstDate = request.session['checkin']
     SecDate =  request.session['checkout']
+    current_user = request.user
     for room in rooms:
 
             RoomsBooked = Reservation.objects.filter(room = room).filter(CheckIn__lte = SecDate,
@@ -56,8 +57,8 @@ def hoteldetails(request, pk):
 
             Roomsleft = Roomsavailable - count
             room.spaceleft = Roomsleft
-            current_user = request.user
-            context = {'hotels': thehotel, 'reviews':reviews,'user':current_user,'rooms':rooms,'Photos':photos}
+
+    context = {'hotels': thehotel, 'reviews':reviews,'user':current_user,'rooms':rooms,'Photos':photos}
     return render(request, 'HotelApp/hoteldetails.html', context)
 
 

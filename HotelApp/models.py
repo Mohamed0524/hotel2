@@ -7,11 +7,11 @@ class Hotels(models.Model):
     Address = models.CharField(max_length  = 255)
     City = models.CharField(max_length  = 255)
     Country = models.CharField(max_length  = 255)
-    TelephoneNumber = models.IntegerField(default = 0)
+    TelephoneNumber = models.CharField(max_length=12)
     ImagePath = models.CharField(max_length  = 255)
     created_at = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now=True)
-    Description = models.CharField(max_length  = 255)
+    Description = models.TextField(max_length  = 140)
     Partner = models.ForeignKey(Partners,on_delete=models.CASCADE)
     class Meta:
         verbose_name_plural = 'Hotels'
