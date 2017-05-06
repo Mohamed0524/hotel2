@@ -3,6 +3,7 @@ from django.conf import settings
 from django.conf.urls import url,include
 from django.conf.urls.static import static
 from ManageHotels import views
+from ManageHotels.views import ChartData,ChartView
 
 
 app_name = 'ManageHotels'
@@ -23,6 +24,8 @@ urlpatterns = [
      url(r'^yourhotels/(?P<id>[0-9]+)/photodash$', views.showphotodash, name='photodash'),
      url(r'^yourhotels/(?P<id>[0-9]+)/thumbnail$', views.editThumbnail, name='editThumb'),
      url(r'^yourhotels/(?P<id>[0-9]+)/deletephoto$', views.deletePhoto, name='deletephoto'),
+     url(r'^yourhotels/(?P<id>[0-9]+)/charts$', ChartView.as_view(), name = 'partnercharts'),
+     url(r'^yourhotels/(?P<id>[0-9]+)/chart/data$', ChartData.as_view()),
 
 
 

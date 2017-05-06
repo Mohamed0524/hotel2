@@ -1,0 +1,117 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+
+
+{% block scripts %}
+<script>
+var data = 'chart/data'
+var labels1 = [];
+var data1 = []
+$.ajax({
+  method: "GET",
+  url: data,
+  success: function(chartdata){
+    labels1 = chartdata.Countries
+    data1 = chartdata.Count
+    labels2 = chartdata.Hotels
+    data2 = chartdata.Bookings
+    data3 = chartdata.Money
+    var ctx = document.getElementById("myChart");
+    var ctx2 = document.getElementById("myChart2");
+    var ctx4 = document.getElementById("myChart4");
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: labels1,
+          datasets: [{
+                label: 'Hotels per country',
+                data: data1,
+
+                backgroundColor: ['#7a1212','#c97676'],
+                borderColor: [
+                    '#f7f6f4','#f7f6f4'],
+                borderWidth: 3
+            }]
+           },
+       });
+
+
+
+    var myChart2 = new Chart(ctx2, {
+         type: 'bar',
+         data: {
+             labels: labels2,
+             datasets: [{
+                   label: 'Bookings Per Hotel',
+                   data: data2,
+
+                   backgroundColor: ['#579380','#577f93'],
+
+               }]
+              },
+          });
+
+
+          var myChart4 = new Chart(ctx4, {
+            type: 'polarArea',
+            data: {
+                labels: labels2,
+                datasets: [{
+
+                      data: data3,
+
+                      backgroundColor: ['#a86400','#a8700'],
+
+                      borderColor: [
+                          '#a86400','#a8700'],
+                      borderWidth: 3,
+                      label: 'Yearly Earnings £'
+                    }]
+                   },
+               });
+    }
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+{% endblock%}
+
+{% block content %}
+<div class="row">
+    <a href="{% url 'ManageHotels:home' %}" class="btn pull-right">Back</a>
+  <div class="col-md-6 col-md-offset-3">
+
+      <hr>
+      <h4 class="text-center">The number of hotels grouped by country</h4>
+      <canvas id="myChart" width="400" height="400"></canvas>
+
+  <hr>
+      <h4 class="text-center">Number of bookings per Hotel</h4>
+      <canvas id="myChart2" width="400" height="400"></canvas>
+
+  <hr />
+
+      <h4 class="text-center">Yearly earnings from each hotel</h4>
+      <canvas id="myChart4" width="400" height="400"></canvas>
+  </div>
+  <hr />
+
+
+
+
+</div>
+
+
+
+{% endblock %}

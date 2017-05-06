@@ -17,10 +17,23 @@ from django.views import View
 from django.core.files.storage import FileSystemStorage
 from Authorize.models import Partners
 from Reservations.models import Reservation
+from rest_framework.views import APIView
+from rest_framework.response import Response
+import datetime
+from django.db.models import Sum
+
 
 
 def home(request):
-    return render(request,'ManageHotels/home.html')
+    user = request.user
+    partner = user.partners
+    print (partner.id)
+    if partner:
+        context = {'Partner': partner}
+        return render(request,'ManageHotels/home.html',context)
+    else:
+        return HttpResponse("Error")
+
 
 @login_required
 def showhotels(request):
@@ -165,3 +178,39 @@ class BasicUploadView(View):
         else:
             data = {is_valid:False}
         return JsonResponse(data)
+class ChartView(View):
+    def get(self,request,id):
+        return render(request, 'ManageHotels/PartnerCharts.html')
+class ChartData(APIView):
+
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self, request,id, format=None):
+
+
+        HotelCountries = Hotels.objects.filter(Partner_id = id).values_list('Country', flat = True)
+        count = []
+        for Country in HotelCountries:
+            count.append(Hotels.objects.filter(Country = Country).count())
+
+
+        HotelNames = Hotels.objects.filter(Partner_id = id).values_list('Name', flat = True)
+        PartnerHotel = Hotels.objects.filter(Partner_id = id)
+        bookings = []
+        for Hotel in PartnerHotel:
+            bookings.append(Reservation.objects.filter(hotel = Hotel).count())
+
+        today = datetime.datetime.now()
+        money = []
+        for Hotel in PartnerHotel:
+
+            money.append(Reservation.objects.filter(hotel = Hotel ,CheckOut__year = today.year).aggregate(sum=Sum('totalPrice'))['sum'])
+
+
+
+
+
+        data = {"Countries":HotelCountries,"Count":count,"Hotels":HotelNames,"Bookings":bookings,"Money":money}
+        print(money)
+        return Response(data)

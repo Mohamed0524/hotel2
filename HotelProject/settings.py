@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'ManageHotels',
     'wkhtmltopdf',
     'Authorize',
+    'rest_framework',
     'Reservations',
     'registration',
 ]
