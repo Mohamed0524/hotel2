@@ -15,6 +15,7 @@ from django.core.urlresolvers import reverse
 from django.views import View
 from django.db.models import Q
 from Reservations.models import Reservation
+import random
 
 
 
@@ -41,7 +42,16 @@ def hoteldetails(request, pk):
     thehotel = Hotels.objects.get(id = pk)
     reviews = Review.objects.filter(hotel=thehotel)
     rooms = Room.objects.filter(hotel=thehotel)
+    City = thehotel.City
+    NearbyHotels = Hotels.objects.filter(City = City).exclude(id = thehotel.id)
+    Nearbyid = []
+    for Hotel in NearbyHotels:
+        Nearbyid.append(Hotel.id)
+    randomid = random.choice(Nearbyid)
+    Recommendation = Hotels.objects.get(id = randomid)
 
+
+    
     photos = Photo.objects.filter(hotel=thehotel)
     FirstDate = request.session['checkin']
     SecDate =  request.session['checkout']
@@ -58,7 +68,7 @@ def hoteldetails(request, pk):
             Roomsleft = Roomsavailable - count
             room.spaceleft = Roomsleft
 
-    context = {'hotels': thehotel, 'reviews':reviews,'user':current_user,'rooms':rooms,'Photos':photos}
+    context = {'hotels': thehotel, 'reviews':reviews,'user':current_user,'rooms':rooms,'Photos':photos,'Recommended':Recommendation}
     return render(request, 'HotelApp/hoteldetails.html', context)
 
 

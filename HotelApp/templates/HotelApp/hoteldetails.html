@@ -48,7 +48,10 @@
                     {{ hotels.TelephoneNumber}}
                 </dd>
         <!-- Unless there is only 1 hotel in this City , Display a recommended Hotel. -->
-
+                <dt class="col-sm-5">Other Hotels Nearby:</dt>
+                <dd class="col sm-7">
+                    <a href="{% url 'HotelApp:hoteldetails' Recommended.id %}">{{Recommended.Name}}</a>
+                </dd>
 
         </dl>
 
@@ -73,7 +76,7 @@
         <p><b>Rooms Left: </b>{{room.spaceleft}}</p>
 
         {% if room.spaceleft > 0 %}
-        
+
         <a href="{% url 'Reservations:bookroom' room.id hotels.id %}" class="btn btn-success">Book</a>
         <hr />
         {% endif%}
