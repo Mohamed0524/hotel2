@@ -18,10 +18,11 @@ Current Features:
 10. User can send Partner Proposal to admin
 11. Admin can Accept or Decline Partner proposal
 12. Authorization , admin / partner/ user can access different parts of the site.
-
+13. Hotels are owned by Partners
+14. Advanced Search for Hotels
+15. Users can book Reservations
+16 Charts for partners to view statistics
+17. Users are recommended nearby hotels
 
 Upcoming Features:
-> Hotels are owned by Partners
-> Advanced Search for hotels
-> Users can book reservations
-> Charts for partners
+> Star Rating System

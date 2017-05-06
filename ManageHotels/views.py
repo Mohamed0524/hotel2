@@ -190,7 +190,7 @@ class ChartData(APIView):
     def get(self, request,id, format=None):
 
 
-        HotelCountries = Hotels.objects.filter(Partner_id = id).values_list('Country', flat = True)
+        HotelCountries = Hotels.objects.filter(Partner_id = id).values_list('Country', flat = True).distinct()
         count = []
         for Country in HotelCountries:
             count.append(Hotels.objects.filter(Country = Country).count())
@@ -207,9 +207,6 @@ class ChartData(APIView):
         for Hotel in PartnerHotel:
 
             money.append(Reservation.objects.filter(hotel = Hotel ,CheckOut__year = today.year).aggregate(sum=Sum('totalPrice'))['sum'])
-
-
-
 
 
         data = {"Countries":HotelCountries,"Count":count,"Hotels":HotelNames,"Bookings":bookings,"Money":money}

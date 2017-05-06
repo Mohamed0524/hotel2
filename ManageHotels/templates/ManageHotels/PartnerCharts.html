@@ -26,14 +26,23 @@ $.ajax({
           datasets: [{
                 label: 'Hotels per country',
                 data: data1,
-
                 backgroundColor: ['#7a1212','#c97676'],
                 borderColor: [
                     '#f7f6f4','#f7f6f4'],
                 borderWidth: 3
             }]
            },
-       });
+             options: {
+                       scales:
+                       {
+                          yAxes:
+                           [{ ticks:
+                               {
+                                   beginAtZero:true }
+                           }]
+                        }
+                      }
+        });
 
 
 
@@ -44,11 +53,20 @@ $.ajax({
              datasets: [{
                    label: 'Bookings Per Hotel',
                    data: data2,
-
                    backgroundColor: ['#579380','#577f93'],
 
                }]
               },
+              options: {
+                        scales:
+                        {
+                           yAxes:
+                            [{ ticks:
+                                {
+                                    beginAtZero:true }
+                            }]
+                         }
+                       }
           });
 
 
@@ -68,6 +86,16 @@ $.ajax({
                       label: 'Yearly Earnings £'
                     }]
                    },
+                   options: {
+                             scales:
+                             {
+                                yAxes:
+                                 [{ ticks:
+                                     {
+                                         beginAtZero:true }
+                                 }]
+                              }
+                            }
                });
     }
   })
