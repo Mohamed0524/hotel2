@@ -50,7 +50,13 @@
         <!-- Unless there is only 1 hotel in this City , Display a recommended Hotel. -->
                 <dt class="col-sm-5">Other Hotels Nearby:</dt>
                 <dd class="col sm-7">
-                    <a href="{% url 'HotelApp:hoteldetails' Recommended.id %}">{{Recommended.Name}}</a>
+                    {% if Recommended %}
+                      <a href="{% url 'HotelApp:hoteldetails' Recommended.id %}">{{Recommended.Name}}</a>
+                    {% else %}
+                    <p>
+                      No other nearby Hotels.
+                    </p>
+                    {% endif %}
                 </dd>
 
         </dl>

@@ -47,11 +47,14 @@ def hoteldetails(request, pk):
     Nearbyid = []
     for Hotel in NearbyHotels:
         Nearbyid.append(Hotel.id)
-    randomid = random.choice(Nearbyid)
-    Recommendation = Hotels.objects.get(id = randomid)
+    if not Nearbyid:
+        Recommendation = None
+    else:
+        randomid = random.choice(Nearbyid)
+        Recommendation = Hotels.objects.get(id = randomid)
 
 
-    
+
     photos = Photo.objects.filter(hotel=thehotel)
     FirstDate = request.session['checkin']
     SecDate =  request.session['checkout']
