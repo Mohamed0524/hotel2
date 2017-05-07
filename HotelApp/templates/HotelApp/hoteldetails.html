@@ -67,6 +67,34 @@
 
   </div>
 </div>
+<hr />
+<div class= "panel panel-primary">
+
+  <div class = "panel-heading">
+    <h3 class="panel-title ">Weather information about <b>{{hotels.City}}</b>:</h3>
+
+  </div>
+
+  <div class="panel panel-body">
+            <div class="text-center">
+              <b>Current Temperature</b>
+              <p id="temp"></p>
+              <img id="icon"  src="" />
+            </div>
+            <div class="text-center">
+              <b>Current Weather</b>
+              <p id="weather">
+              </p><p id="desc"></p>
+            </div>
+            <div id="info">
+            </div>
+
+
+
+
+
+</div>
+</div>
 
 <hr>
       <!-- Displays a list of all Rooms that this Hotel Offers and the rooms information. -->
@@ -179,6 +207,48 @@
         lazyLoad:'ondemand'
 
       });
+
+  </script>
+
+
+  <script>
+
+      var City = "{{hotels.City}}";
+        function ascii (a) { return String.fromCharCode(a); }
+        function displayweather(data){
+          if (data.length !== 0){
+                var mainweather = (data.weather[0].main);
+                var desc = (data.weather[0].description);
+                var temp = (data.main.temp);
+                var code = (data.weather[0].icon)
+                var hum = (data.main.humidity)
+                var matemp = (data.main.temp_max)
+                var Wind= (data.wind.speed)
+                var img = "http://openweathermap.org/img/w/"+code+".png"
+                console.log()
+                var main = $('<p>').appendTo('#weather').text(mainweather + " | " +desc);
+                var temp = $('<p>').appendTo('#temp').text(temp +  ascii(176) +"C");
+                var humidity = $('<p>').appendTo('#info').text("Humidity:"+"   "+hum+"%"+"  -   "+ " Max Temp: "+matemp+" "+ ascii(176) +"C" +"  -  "+" Wind Speed: "+Wind+ "Mph");
+              //  var mintemp = $('<p>').appendTo('#info').text("Min Temp: "+mitemp+ ascii(176) +"C");
+              //  var wspeed = $('<p>').appendTo('#info').text("Wind Speed: "+Wind+ "Mph");
+                $("#icon").attr("src",img) }
+              else{
+                var error = $('<p>').appendTo('#info').text("Sorry , We have been unable to retrieve live weather information");
+              }
+        }
+
+
+
+      $(document).ready(function() {
+
+
+        $.getJSON("http://api.openweathermap.org/data/2.5/weather?q="+ City +"&units=metric&APPID=ae9512f4de94ef9415b53d6a357bd78a",displayweather);
+
+
+
+
+        })
+
 
   </script>
 

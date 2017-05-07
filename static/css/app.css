@@ -1,11 +1,33 @@
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
+@import url('https://fonts.googleapis.com/css?family=Just+Another+Hand');
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+
+#info{
+  font-family: 'Indie Flower', cursive !important;
+  font-size: 20px !important;
+  width: 100%;
+  text-align: center;
+
+}
+#temp{
+  font-family: 'Oswald', sans-serif !important;
+  font-size: 60px !important;
+
+}
+#weather{
+  font-family: 'Open Sans Condensed', sans-serif !important;
+  font-size: 35px !important;
+}
+
 .col-centered{
   float: none;
   margin: 0 auto;
