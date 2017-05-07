@@ -1,6 +1,8 @@
 {% extends "base/base.html" %}
 {% load staticfiles %}
 {% block content %}
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
 {% if user.is_authenticated %}
   <h1 class="form-signin-heading">Restricted Page , You are already logged In!</h1>
 {%else%}
@@ -25,12 +27,25 @@
     <button class="btn btn-lg btn-primary btn-block" type="submit" value="submit">Submit</button>
     <input type="hidden" name="next" value="{{next}}" />
   </form>
+  <hr />
   <p>
-    Not a member?
+    <b>Not a member?</b>
 
 
   </p>
-  <a href="/social/twitter/login/?process=login">Login With Twitter</a><span> | </span>
-    <a href="{% url 'registration_register' %}">Register</a>
+  <a id="twitterl"class="btn btn-block btn-social btn-twitter" href="/social/twitter/login/?process=login">
+  <span class="btn-twitter"></span>
+  Sign in with Twitter
+</a><span id="span1"></span>
+  <a id="twitterl"class="btn btn-block btn-social btn-google" href="/social/google/login/?process=login">
+  <span class="btn-google"></span>
+  Sign in with Google
+</a><span id="span2">  </span>
+<a id="twitterl"class="btn btn-block btn-social btn-openid" href="{% url 'registration_register' %}">
+<span class="btn-openid"></span>
+Check-In Register!
+</a><span id="span2">  </span>
+</div>
+
   {% endif %}
   {% endblock %}

@@ -11,6 +11,15 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
+#twitterl{
+  width: 200px !important;
+  font-size: 15px;
+  float: left;
+  margin-right: 20px;
+}
+#span1{
+  float: left;
+}
 #info{
   font-family: 'Indie Flower', cursive !important;
   font-size: 20px !important;

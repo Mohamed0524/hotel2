@@ -23,6 +23,9 @@ Current Features:
 15. Users can book Reservations
 16 Charts for partners to view statistics
 17. Users are recommended nearby hotels
-
+18. Star Rating System
+19. Weather API , Live Weather
+20. Login With Google Authentication
+21. Login with Twitter Authentication
 Upcoming Features:
-> Star Rating System
+> Paypal Sandbox
