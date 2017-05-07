@@ -27,7 +27,10 @@
   </form>
   <p>
     Not a member?
-    <a href="{% url 'registration_register' %}">Register</a>
+
+
   </p>
+  <a href="/social/twitter/login/?process=login">Login With Twitter</a><span> | </span>
+    <a href="{% url 'registration_register' %}">Register</a>
   {% endif %}
   {% endblock %}

@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^Reservations/', include('Reservations.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/register/$', MyRegistrationView.as_view(),),
+    url(r'^social/', include('allauth.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
