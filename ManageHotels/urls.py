@@ -1,12 +1,13 @@
-from django.conf.urls import url
-from django.conf import settings
 from django.conf.urls import url,include
+from django.conf import settings
 from django.conf.urls.static import static
 from ManageHotels import views
 from ManageHotels.views import ChartData,ChartView
 
-
 app_name = 'ManageHotels'
+
+# Specifying all the urls for the Manage Hotels app which the partners will see .
+# Allows for Creating Hotels , Editing them and photos , and adding rooms etc.
 urlpatterns = [
      url(r'^$', views.home, name='home'),
      url(r'^newhotel$', views.HotelCreateView.as_view(), name='createhotel'),
@@ -14,6 +15,7 @@ urlpatterns = [
      url(r'^yourhotels/(?P<pk>[0-9]+)/edit$', views.HotelUpdateView.as_view(), name='editHotel'),
      url(r'^yourhotels/(?P<pk>[0-9]+)/bookings$', views.showreservations, name='hotelreservations'),
      url(r'^yourhotels/(?P<pk>[0-9]+)/delete$', views.HotelDeleteView.as_view(), name='deleteHotel'),
+     url(r'^yourhotels/bookings/(?P<pk>[0-9]+)/delete$', views.cancelbooking, name='removebooking'),
      url(r'^yourhotels/(?P<pk>[0-9]+)/dashboard$', views.showdashboard, name='hoteldash'),
      url(r'^yourhotels/(?P<pk>[0-9]+)/manage$', views.managehotel, name='managehotel'),
      url(r'^yourhotels/(?P<pk>[0-9]+)/rooms$', views.showRoomsDash, name='showRoomsDash'),
@@ -26,9 +28,6 @@ urlpatterns = [
      url(r'^yourhotels/(?P<id>[0-9]+)/deletephoto$', views.deletePhoto, name='deletephoto'),
      url(r'^yourhotels/(?P<id>[0-9]+)/charts$', ChartView.as_view(), name = 'partnercharts'),
      url(r'^yourhotels/(?P<id>[0-9]+)/chart/data$', ChartData.as_view()),
-
-
-
 
 
 ]

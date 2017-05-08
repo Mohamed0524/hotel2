@@ -66,24 +66,25 @@
     </head>
 
     <body>
+        <!-- SChanges the nav links depending on Authentication status.-->
         <div class="flex-center position-ref full-height">
             <div class="top-right links">
             {% if user.is_authenticated %}
               <a href="{% url 'HotelApp:hotelindex' %}">  Home</a>
               <a href="#">Logout</a>
             {% else %}
-          <a href="{% url 'auth_login'%}">Login</a>
-          <a href="{% url 'registration_register'%}">Register Here</a>
+              <a href="{% url 'auth_login'%}">Login</a>
+              <a href="{% url 'registration_register'%}">Register Here</a>
 
         {% endif %}
         </div>
+          <!--  The content from the other pages is introduced here. -->
+        <div class="content">
 
-      <div class="content">
+          {% block content %}
 
-        {% block content %}
-
-        {% endblock %}
-      </div>
+          {% endblock %}
+        </div>
   </div>
 </body>
 </html>

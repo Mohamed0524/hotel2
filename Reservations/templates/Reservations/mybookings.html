@@ -14,12 +14,8 @@
 
       {%for booking in bookings%}
 
-
-
-
-
-      <a class="btn btn-sm btn-danger pull-right" href="{% url 'Reservations:cancelbooking' booking.id %}">Cancel</a>
-      <a  class="btn btn-sm btn-default pull-right "href="{% url 'Reservations:GenPDF' booking.id %}">Download PDF</a>
+        <a class="btn btn-sm btn-danger pull-right" href="{% url 'Reservations:cancelbooking' booking.id %}">Cancel</a>
+        <a  class="btn btn-sm btn-default pull-right "href="{% url 'Reservations:gpdf' booking.id %}">Download PDF</a>
         <h5><u> {{booking.hotel.Name}}</u></h5>
         <p><mark>Room Type :</mark> {{booking.room.RoomType}}.  </p>
         <p><mark>Guest Name :</mark>  {{booking.guestFirstName}} {{booking.guestLastName}}.  </p>
@@ -33,4 +29,4 @@
 
     </div>
   </div>
-  {% endblock %}
+{% endblock %}

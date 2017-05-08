@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from HotelApp.models import Hotels
-
+# Stating the Photo model , and giving it a file field to allow photo uploads.
 class Photo(models.Model):
 
     path = models.FileField()

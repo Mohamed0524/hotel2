@@ -1,28 +1,25 @@
-from django.shortcuts import render
-from django.http import HttpResponse,HttpResponseRedirect
-from django.shortcuts import render,render_to_response
-from HotelApp.models import Hotels
-from HotelApp.models import Review
-from HotelApp.models import Room
-from django.views import generic
-from django.contrib.auth.decorators import login_required
-from django import forms
-from django.views.generic.edit import CreateView,UpdateView,DeleteView
-from django.core.urlresolvers import reverse,reverse_lazy
-from django.template import RequestContext
-from ManageHotels.forms import PhotoForm
-from ManageHotels.models import Photo
-from django.http import JsonResponse
-from django.views import View
-from django.core.files.storage import FileSystemStorage
-from Authorize.models import Partners
-from Reservations.models import Reservation
-from rest_framework.views import APIView
-from rest_framework.response import Response
 import datetime
 from django.db.models import Sum
+from django.shortcuts import render,render_to_response
+from django.http import HttpResponse,HttpResponseRedirect,JsonResponse
+from django.core.urlresolvers import reverse,reverse_lazy
+from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.decorators import login_required
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django import forms
+from HotelApp.models import Hotels,Review,Room
+from ManageHotels.forms import PhotoForm
+from ManageHotels.models import Photo
+from django.views import generic,View
+from django.views.generic.edit import CreateView,UpdateView,DeleteView
+from django.template import RequestContext
+from Authorize.models import Partners
+from Reservations.models import Reservation
 
 
+
+# Show the Partner Homepage if the request is made by a partner.
 def home(request):
     user = request.user
     partner = user.partners
@@ -35,7 +32,7 @@ def home(request):
     else:
         return HttpResponse("Error")
 
-
+# Show the partner their hotels.
 @login_required
 def showhotels(request):
     user = request.user
@@ -43,15 +40,21 @@ def showhotels(request):
     hotels_list = Hotels.objects.filter(Partner=thepartner)
     context = {'Hotels': hotels_list}
     return render(request,'ManageHotels/yourhotels.html',context)
+
+#Show the partner reservations for specific hotels.
 def showreservations(request,pk):
     thehotel = Hotels.objects.get(id = pk)
     Bookings = Reservation.objects.filter(hotel= thehotel)
     context = {'reservations':Bookings,'hotel':thehotel}
     return render(request,'ManageHotels/viewbookings.html',context)
+
+# Display a hotel dashboard enabling the partner to manage their hotels including add rooms
 def showdashboard(request,pk):
     thehotel = Hotels.objects.get(id = pk)
     context = {'Hotel': thehotel}
     return render(request,'ManageHotels/hoteldash.html',context)
+
+
 def managehotel(request,pk):
     thehotel = Hotels.objects.get(id = pk)
     context = {'Hotel': thehotel}
@@ -88,7 +91,7 @@ def deletePhoto(request,id):
        photo.delete()
        link = reverse('ManageHotels:photodash', args=[hotel.id])
        return HttpResponseRedirect(link)
-
+# Generate Create Update and delete views using django's Createview
 class HotelCreateView(CreateView):
 
     model = Hotels
@@ -161,6 +164,8 @@ class RoomDeleteView(DeleteView):
         url = reverse('ManageHotels:showRoomsDash', args=[hotelid])
         return url
 
+# use a django defined view to show the image upload.
+#This view also handles post retrieving and returning a json response.
 class BasicUploadView(View):
     def get(self,request,id):
         photos_list = Photo.objects.filter(hotel=id)
@@ -179,26 +184,30 @@ class BasicUploadView(View):
         else:
             data = {is_valid:False}
         return JsonResponse(data)
+
 class ChartView(View):
     def get(self,request,id):
         return render(request, 'ManageHotels/PartnerCharts.html')
+
+#Using django rest to send data to he views.
 class ChartData(APIView):
 
     authentication_classes = []
     permission_classes = []
 
     def get(self, request,id, format=None):
-
-
+        # Loads the hotel countires with a list of countries within which the partner operates
+        # Get the number of Hotels in each country.
         HotelCountries = Hotels.objects.filter(Partner_id = id).values_list('Country', flat = True).distinct()
         count = []
         for Country in HotelCountries:
             count.append(Hotels.objects.filter(Country = Country).count())
 
-
+        # Get the number of bookings made by each hotel
         HotelNames = Hotels.objects.filter(Partner_id = id).values_list('Name', flat = True)
         PartnerHotel = Hotels.objects.filter(Partner_id = id)
         bookings = []
+        # calculate the amount of money each hotel has made this year.
         for Hotel in PartnerHotel:
             bookings.append(Reservation.objects.filter(hotel = Hotel).count())
 
@@ -212,3 +221,10 @@ class ChartData(APIView):
         data = {"Countries":HotelCountries,"Count":count,"Hotels":HotelNames,"Bookings":bookings,"Money":money}
         print(PartnerHotel)
         return Response(data)
+# Partners can cancel a booking made by a user.
+def cancelbooking(request,pk):
+    Booking = Reservation.objects.get(id = pk)
+    hotelid = Booking.hotel.id
+    Booking.delete()
+    link = reverse('ManageHotels:hotelreservations', args=[hotelid])
+    return HttpResponseRedirect(link)

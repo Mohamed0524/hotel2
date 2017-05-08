@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 
+# Defines the roles on this website : Admin , Partner and user.
 class Role(models.Model):
     RoleName = models.CharField(max_length  = 255)
 
@@ -11,6 +12,7 @@ class Role(models.Model):
     def __str__(self):
          return self.RoleName
 
+# Used to restrict access to certain parts of the website, automaticaly makes each created user a customer.
 class UserRole(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     roleid = models.IntegerField(default = 3)
@@ -25,7 +27,7 @@ def save_set(sender,instance,**kwargs):
 
     def __str__(self):
          return self.RoleName
-
+# The partners model can store and query regarding partners
 class Partners(models.Model):
     userID = models.OneToOneField(User, on_delete=models.CASCADE)
     CompanyName = models.CharField(max_length  = 255)

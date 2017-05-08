@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from HotelApp import views
 from Authorize import views
-
+# Url patters for authorization such as accepting , deleting and removing a partner.
 app_name = 'Authorize'
 urlpatterns = [
          url(r'^$', views.displayDash, name='displayDash'),

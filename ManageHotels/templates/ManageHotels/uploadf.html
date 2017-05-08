@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %}
 {% load staticfiles %}
 {% block content %}
+<!-- The front "end" of the JavaScript which shows the uploaded photos to the  users-->
   <div class="panel-body">
   <button type="button" class="btn btn-primary js-upload-photos">
     <span class="glyphicon glyphicon-cloud-upload"></span> Upload Photos
@@ -31,7 +32,7 @@
   <a href="{% url 'ManageHotels:photodash' hotelid %}" class="btn pull-right">Back</a>
 
   </div>
-
+  <!-- Shows a progress bar when uploading is taking place.-->
   <div class="modal fade" id="modal-progress" data-backdrop="static" datakeyboard="false">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -51,6 +52,7 @@
 
 {% endblock %}
 {% block scripts %}
+<!-- Dependencies -->
 <script
       src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
       integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="

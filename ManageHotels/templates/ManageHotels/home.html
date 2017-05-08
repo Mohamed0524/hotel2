@@ -2,8 +2,6 @@
 {% load staticfiles %}
 {% block content %}
 
-<!--  unless role id is equal to 2 -->
-
 <!-- Displays the Partners Dashboard -->
 <div class="container">
     <div class="row">
@@ -17,11 +15,10 @@
                       <!--  partner id in link -->
                       <a href="{% url 'ManageHotels:showhotel'  %}" class="list-group-item">View Your Hotels</a>
                       <a href="newhotel" class="list-group-item">List a New Hotel</a>
+                        <!--  partners Statistics are shown if the partner has atleast one hotel -->
                       {% if NumHotel > 0%}
                         <a href="{% url 'ManageHotels:partnercharts' Partner.id %}" class="list-group-item">View Statistics</a>
                       {% endif%}
-
-
 
                     </div>
                 </div>
@@ -31,10 +28,5 @@
         </div>
     </div>
 </div>
-
-<!-- else
-
-  <h1> No Way.</h1>-->
-
 
 {% endblock %}

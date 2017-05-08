@@ -20,6 +20,7 @@ from django.db.models import Sum
 
 
 
+
 def home(request):
     return render(request,'HotelApp/home.html')
 
@@ -38,9 +39,18 @@ def regcomplete(request):
         return HttpResponseRedirect(link)
 
 def hoteldetails(request, pk):
-
+    theuser = request.user
     #thehotel = Category.objects.filter(id = pk)[0]
+
+
     thehotel = Hotels.objects.get(id = pk)
+    RecentReservation = Reservation.objects.filter(hotel =  thehotel).filter(user = theuser)
+
+    if RecentReservation:
+        allowReview = True
+    else:
+        allowReview = False
+
     reviews = Review.objects.filter(hotel=thehotel)
     rooms = Room.objects.filter(hotel=thehotel)
     City = thehotel.City
@@ -98,7 +108,7 @@ def hoteldetails(request, pk):
 
 
 
-    context = {'hotels': thehotel, 'reviews':reviews,'user':current_user,'rooms':rooms,'Photos':photos,'Recommended':Recommendation,'Rating':Rating,'starpath':starpath}
+    context = {'hotels': thehotel, 'reviews':reviews,'user':current_user,'rooms':rooms,'Photos':photos,'Recommended':Recommendation,'Rating':Rating,'starpath':starpath,'allowReview':allowReview}
     return render(request, 'HotelApp/hoteldetails.html', context)
 
 

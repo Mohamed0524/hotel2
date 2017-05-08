@@ -115,7 +115,7 @@
 
         {% if room.spaceleft > 0 %}
 
-        <a href="{% url 'Reservations:bookroom' room.id hotels.id %}" class="btn btn-success">Book</a>
+        <a href="{% url 'Reservations:bookroom' hotels.id room.id %}" class="btn btn-success">Book</a>
         <hr />
         {% endif%}
        {% endfor %}
@@ -175,7 +175,9 @@
 <hr>
 
 <!-- If the User has made a booking with the current hotel , display a Add review form. -->
+{% if allowReview == True %}
 <a class="btn btn-info pull-right btn-sm" href="{% url 'HotelApp:createreview' hotels.id %}">ADD Review</a>
+{% endif %}
 
 <!-- If Laravel Validation detects errors then this will show a message. -->
 

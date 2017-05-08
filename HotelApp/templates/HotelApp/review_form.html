@@ -2,9 +2,9 @@
 
 {% load staticfiles %}
 {% block scripts %}
-  <script src="{% static "/js/star-rating.js" %}" type="text/javascript"></script>
+<script src="{% static "/js/star-rating.js" %}" type="text/javascript"></script>
 <script>
-
+    // Manipulates the rating field in the form to display as stars.
     var Rating = document.getElementById('id_rating');
     Rating.type = "hidden";
     Rating.setAttribute("data-stop","100")

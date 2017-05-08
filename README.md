@@ -28,4 +28,3 @@ Current Features:
 20. Login With Google Authentication
 21. Login with Twitter Authentication
 Upcoming Features:
-> Paypal Sandbox

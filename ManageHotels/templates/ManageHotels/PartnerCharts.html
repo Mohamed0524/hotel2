@@ -3,116 +3,120 @@
 
 
 {% block scripts %}
+  <!-- Provides random colors for the charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.2/randomColor.js"></script>
+
+  <!-- Makes a get request using Ajax to the django rest api retrieving data -->
 <script>
-var data = 'chart/data'
-var labels1 = [];
-var data1 = []
-$.ajax({
-  method: "GET",
-  url: data,
-  success: function(chartdata){
-    labels1 = chartdata.Countries
-    data1 = chartdata.Count
-    labels2 = chartdata.Hotels
-    data2 = chartdata.Bookings
-    data3 = chartdata.Money
-    var ctx = document.getElementById("myChart");
-    var ctx2 = document.getElementById("myChart2");
-    var ctx4 = document.getElementById("myChart4").getContext("2d");
+    var data = 'chart/data'
+    var labels1 = [];
+    var data1 = []
+    $.ajax({
+      method: "GET",
+      url: data,
+      success: function(chartdata){
+        labels1 = chartdata.Countries
+        data1 = chartdata.Count
+        labels2 = chartdata.Hotels
+        data2 = chartdata.Bookings
+        data3 = chartdata.Money
+        var ctx = document.getElementById("myChart");
+        var ctx2 = document.getElementById("myChart2");
+        var ctx4 = document.getElementById("myChart4").getContext("2d");
 
-    var myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-          labels: labels1,
-          datasets: [{
-                label: 'Hotels per country',
-                data: data1,
-                backgroundColor: randomColor({
-                                               count: labels2.length,
-                                               hue: 'orange'
-                                            }),
-                borderColor: [
-                    '#f7f6f4','#f7f6f4'],
-                borderWidth: 3
-            }]
-           },
-             options: {
-                       scales:
-                       {
-                          yAxes:
-                           [{ ticks:
-                               {
-                                   beginAtZero:true }
-                           }]
-                        }
-                      }
-        });
-
-
-
-    var myChart2 = new Chart(ctx2, {
-         type: 'bar',
-         data: {
-             labels: labels2,
-             datasets: [{
-                   label: 'Bookings Per Hotel',
-                   data: data2,
-                   backgroundColor: randomColor({
-                                                  count: labels2.length,
-                                                  hue: 'blue'
-                                               }),
-
-               }]
-              },
-              options: {
-                        scales:
-                        {
-                           yAxes:
-                            [{ ticks:
-                                {
-                                    beginAtZero:true }
-                            }]
-                         }
-                       }
-          });
-
-
-          var myChart4 = new Chart(ctx4, {
-            type: 'polarArea',
-            data: {
-                labels: labels2,
-                datasets: [{
-
-                      data: data3,
-
-                      backgroundColor: randomColor({
-                                                     count: labels2.length,
-                                                     hue: 'red'
-                                                  }),
-
-                      borderColor:randomColor({
-                                                     count: labels2.length,
-                                                     hue: 'red'
-                                                  }),
-                      borderWidth: 2,
-                      label: 'Yearly Earnings £'
-                    }]
-                   },
-                   options: {
-                             scales:
-                             {
-                                yAxes:
-                                 [{ ticks:
-                                     {
-                                         beginAtZero:true }
-                                 }]
-                              }
+        // A bar chart that shows the number of hotels a partner has in each country
+        var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: labels1,
+              datasets: [{
+                    label: 'Hotels per country',
+                    data: data1,
+                    backgroundColor: randomColor({
+                                                   count: labels2.length,
+                                                   hue: 'orange'
+                                                }),
+                    borderColor: [
+                        '#f7f6f4','#f7f6f4'],
+                    borderWidth: 3
+                }]
+               },
+                 options: {
+                           scales:
+                           {
+                              yAxes:
+                               [{ ticks:
+                                   {
+                                       beginAtZero:true }
+                               }]
                             }
-                          })
+                          }
+            });
 
-    }
-  })
+
+        // A bar chart that show the bookings that each hotel is recieving
+        var myChart2 = new Chart(ctx2, {
+             type: 'bar',
+             data: {
+                 labels: labels2,
+                 datasets: [{
+                       label: 'Bookings Per Hotel',
+                       data: data2,
+                       backgroundColor: randomColor({
+                                                      count: labels2.length,
+                                                      hue: 'blue'
+                                                   }),
+
+                   }]
+                  },
+                  options: {
+                            scales:
+                            {
+                               yAxes:
+                                [{ ticks:
+                                    {
+                                        beginAtZero:true }
+                                }]
+                             }
+                           }
+              });
+
+              // A bar chart that shows the yearly income for each hotel the partner owns
+              var myChart4 = new Chart(ctx4, {
+                type: 'polarArea',
+                data: {
+                    labels: labels2,
+                    datasets: [{
+
+                          data: data3,
+
+                          backgroundColor: randomColor({
+                                                         count: labels2.length,
+                                                         hue: 'red'
+                                                      }),
+
+                          borderColor:randomColor({
+                                                         count: labels2.length,
+                                                         hue: 'red'
+                                                      }),
+                          borderWidth: 2,
+                          label: 'Yearly Earnings £'
+                        }]
+                       },
+                       options: {
+                                 scales:
+                                 {
+                                    yAxes:
+                                     [{ ticks:
+                                         {
+                                             beginAtZero:true }
+                                     }]
+                                  }
+                                }
+                              })
+
+        }
+      })
 
 
 
@@ -121,6 +125,7 @@ $.ajax({
 {% endblock%}
 
 {% block content %}
+<!-- The comparison graphs are displayed here -->
 <div class="row">
     <a href="{% url 'ManageHotels:home' %}" class="btn pull-right">Back</a>
   <div class="col-md-6 col-md-offset-3">

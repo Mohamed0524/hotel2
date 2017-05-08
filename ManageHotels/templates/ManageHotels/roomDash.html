@@ -2,32 +2,27 @@
 {% load staticfiles %}
 {% block content %}
 
-<!--  unless role id is equal to 2 -->
 
-<!-- Displays the Partners Dashboard -->
+<!-- Displays the Room dashboard -->
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">{{Hotel.Name}} | Rooms</div>
 
-
-
                 <div class="panel-body">
 
-
                 <table class="table">
-
                     <thead>
                       <tr>
-                      <th>Type</th>
-                      <th></th>
-                      <th></th>
+                        <th>Type</th>
+                        <th></th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
 
-
+                <!-- Displays each room in a hotel allowing the partner to add , edit and delete them. -->
                         {%for room in rooms%}
 
                         <tr>
@@ -38,7 +33,7 @@
                           <form action="{% url 'ManageHotels:deleteRoom' room.id %}" method="post">
                               {% csrf_token %}
                           <td><button type="submit" class="btn btn-danger pull-right">Delete Room</button></td>
-                            </form>
+                          </form>
                         </tr>
 
                       {%endfor%}
@@ -49,16 +44,11 @@
                 </div>
                 <hr>
                   <a class="btn pull-right" href="{% url 'ManageHotels:managehotel' Hotel.id %}">Back</a>
-                <div class="panel-footel text-center">
-                    </div>
+                <div class="panel-footel text-center"></div>
             </div>
         </div>
     </div>
 </div>
-
-<!-- else
-
-  <h1> No Way.</h1>-->
 
 
 {% endblock %}

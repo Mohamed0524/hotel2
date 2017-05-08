@@ -2,9 +2,7 @@
 {% load staticfiles %}
 {% block content %}
 
-<!--  unless role id is equal to 2 -->
-
-<!-- Displays the Partners Dashboard -->
+<!-- Displays the Hotel Management Dashboard-->
 <div class="container">
 
     <div class="row">
@@ -18,11 +16,10 @@
 
                 <div class="panel-body">
                     <div class="list-group">
-                      <!--  partner id in link -->
+                      <!-- Partners can view reservations or manage an existing hotel-->
                       <a href="{% url 'ManageHotels:hotelreservations' Hotel.id  %}" class="list-group-item">View Your Reservations</a>
                       <a href="{% url 'ManageHotels:managehotel' Hotel.id %}" class="list-group-item">Manage Hotel</a>
-
-
+                      
                     </div>
                 </div>
                 <div class="panel-footel text-center"></div>

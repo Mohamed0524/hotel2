@@ -4,7 +4,7 @@
 
 <h1>Photos:</h1>
 <br />
-
+<!-- Partners can upload thumbnails for their hotels -->
  {% if Thumbnail %}
   <form method="POST" action="{% url 'ManageHotels:editThumb' Hotel.id %}" enctype="multipart/form-data">
     {% csrf_token %}
@@ -19,11 +19,12 @@
   <button type="submit" class="btn btn-primary">Edit Thumbnail</button>
 
 </form>
-{% else %}
-<p> Please Upload a Photo to represent this hotels Thumbnail</p>
+  {% else %}
+  <p> Please Upload a Photo to represent this hotels Thumbnail</p>
 {% endif %}
 
-<hr />
+  <hr />
+<!-- Partners can add Room photos for their hotels and remove them -->
 {% for photo in Photos|slice:"1:"%}
   <img class="img-thumbnail"src="{{MEDIA_URL}}{{photo.path}}" />
   <a class="btn btn btn-danger pull-right text-center" href="{% url 'ManageHotels:deletephoto' photo.id %}">Delete</a>

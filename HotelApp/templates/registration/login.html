@@ -1,51 +1,56 @@
 {% extends "base/base.html" %}
 {% load staticfiles %}
 {% block content %}
+<!-- The login page -->
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
 {% if user.is_authenticated %}
   <h1 class="form-signin-heading">Restricted Page , You are already logged In!</h1>
 {%else%}
+    <!-- The login form -->
   <h1>Login</h1>
   <form role="form" method="post" action=".">
       {{form.non_field_errors}}
       {% csrf_token %}
-  <div class="form-group">
-    <label for="inputUsername">Username</label>
-    <input type="text" name="username" id="id_username" class="form-control" placeholder="Username" />
-  </div>
-  <p>
-    {{form.username.errors}}
-  </p>
-  <div class="form-group">
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="id_password" class="form-control" placeholder="Password" />
-  </div>
-  <p>
-    {{form.password.errors}}
-  </p>
+
+    <div class="form-group">
+        <label for="inputUsername">Username</label>
+        <input type="text" name="username" id="id_username" class="form-control" placeholder="Username" />
+    </div>
+    <p>
+      {{form.username.errors}}
+    </p>
+    <div class="form-group">
+      <label for="inputPassword">Password</label>
+      <input type="password" name="password" id="id_password" class="form-control" placeholder="Password" />
+    </div>
+    <p>
+      {{form.password.errors}}
+    </p>
     <button class="btn btn-lg btn-primary btn-block" type="submit" value="submit">Submit</button>
     <input type="hidden" name="next" value="{{next}}" />
   </form>
   <hr />
-  <p>
-    <b>Not a member?</b>
+  <!-- Links for a New member such as social authentication -->
+  <p><b>Not a member?</b></p>
 
-
-  </p>
   <a id="twitterl"class="btn btn-block btn-social btn-twitter" href="/social/twitter/login/?process=login">
-  <span class="btn-twitter"></span>
-  Sign in with Twitter
-</a><span id="span1"></span>
-  <a id="twitterl"class="btn btn-block btn-social btn-google" href="/social/google/login/?process=login">
-  <span class="btn-google"></span>
-  Sign in with Google
-</a><span id="span2">  </span>
-<a id="twitterl"class="btn btn-block btn-social btn-openid" href="{% url 'registration_register' %}">
-<span class="btn-openid"></span>
-Check-In Register!
-</a><span id="span2">  </span>
-</div>
+    <span class="btn-twitter"></span> Sign in with Twitter</a>
+
+      <span id="span1"></span>
+
+      <a id="twitterl"class="btn btn-block btn-social btn-google" href="/social/google/login/?process=login">
+      <span class="btn-google"></span>Sign in with Google</a>
+
+        <span id="span2">  </span>
+
+        <a id="twitterl"class="btn btn-block btn-social btn-openid" href="{% url 'registration_register' %}">
+        <span class="btn-openid"></span>
+        Check-In Register!
+        </a>
+
+        <span id="span2">  </span>
+  </div>
 
   {% endif %}
   {% endblock %}

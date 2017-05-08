@@ -4,18 +4,15 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="page-header">
+          <!-- Display all the details about the users reservation before confirmation-->
           <h1>Check-In: <small>Make a Booking</small></h1>
-
       </div>
-        <center>
-
+      <center>
           <h1>{{hotel.Name}}</h1>
           <small>{{hotel.Address}},{{hotel.City}},{{hotel.Country}}</small>
-
       </center>
       <br />
       <center>
-
           <h2><u>Summary</u></h2>
       </center>
       <br />
@@ -46,8 +43,6 @@
      </center>
 
       <center>
-
-
            <b>Max Occupents:</b><p>{{room.Capacity}} people. </p>
            <b>Beds Provided:</b><p> {{room.BedOption}}.</p>
            <b>Room View:</b><p> {{room.View}}.</p>
@@ -60,17 +55,11 @@
       <br />
       <hr />
 
+    <!-- after reviewing the Reservation details the user enters their First and Last name to make a booking -->
       <form method="POST"  action="{% url 'Reservations:newbooking' room.id hotel.id checkin checkout totalcost  %}">
           {% csrf_token %}
-
-
-
-
         <center>
-
-
           <div class="form-group row">
-
               <div class="col-xs-6">
                   <label for="first">Guest First Name:</label>
                   <input class="form-control pull-left" name="firstname" id="first" type="text" required="First Name" />
@@ -79,9 +68,6 @@
                   <label for="first">Guest Last Name:</label>
                   <input class="form-control pull-right" name="lastname" id="last" type="text" required="Last Name" />
               </div>
-
-
-
           </div>
 
           <hr />

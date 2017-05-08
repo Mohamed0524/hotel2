@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 {% load staticfiles %}
 {% block content %}
-
+  <!-- A form for creating , updating and deleting hotels -->
 <form class="form-horizontal" action="" method="post">
 {% csrf_token %}
 {% include 'HotelApp/form-template.html'%}

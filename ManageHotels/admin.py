@@ -1,5 +1,5 @@
 from django.contrib import admin
 from ManageHotels.models import Photo
 
-# Register your models here.
+# Registering the Photo model to the django admin
 admin.site.register(Photo)

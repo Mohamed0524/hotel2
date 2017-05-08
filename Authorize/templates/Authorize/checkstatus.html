@@ -2,14 +2,11 @@
 {% load staticfiles %}
 {% block content %}
 
-
-        {% if proposal %}
-
+<!-- Users can check their proposal status on this page -->
+          {% if proposal %}
           <p>
               {{user.username}} -  You're proposal is currently being reviewed , we aim to get back to you shortly.
           </p>
-
-
 
         {% else %}
         <p>

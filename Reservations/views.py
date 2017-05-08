@@ -1,41 +1,44 @@
-from django.shortcuts import render
-from django.http import HttpResponse,HttpResponseRedirect
-from HotelApp.models import Hotels
-from HotelApp.models import Room
-from django import forms
-from django.core.urlresolvers import reverse,reverse_lazy
-from ManageHotels.models import Photo
-from HotelApp.models import Proposal
-from django.core.urlresolvers import reverse
-from django.views import View
-from django.db.models import Q
-from django.core.signing import Signer
 import datetime
+from django import forms
+from django.shortcuts import render
+from django.core.urlresolvers import reverse,reverse_lazy
+from django.core.signing import Signer
+from django.http import HttpResponse,HttpResponseRedirect
+from django.db.models import Q
+from HotelApp.models import Hotels,Room,Proposal
+from Authorize.models import UserRole
+from ManageHotels.models import Photo
 from Reservations.models import Reservation
-from wkhtmltopdf.views import PDFTemplateView
-class MyPDF(PDFTemplateView):
-    def get_context_data(self,**kwargs):
-        context = super(MyPDF, self).get_context_data(**kwargs)
+
+from django.views import View
+from django.template.loader import get_template
+from .utils import render_to_pdf
+
+## Generates a PDF using the render help function and outputs it as invoice.html
+class GeneratePDF(View):
+    def get(self,request, *args, **kwargs):
         booking = Reservation.objects.get(id= self.kwargs['id'])
-        booking.photo = Photo.objects.filter(hotel = booking.hotel).first()
-        context['booking'] = booking
+        template = get_template('invoice.html')
+        context = {"booking":booking}
+        html = template.render(context)
+        pdf = render_to_pdf('invoice.html', context)
+        return HttpResponse(pdf,content_type='application/pdf')
 
-        return context
 
 
-
+## Works out how long the user is staying in a hotel for also working out the total cost.
 def bookRoom(request,hotelid,roomid):
+
     FirstDate = request.session['checkin']
     SecDate =  request.session['checkout']
 
     Checkin = datetime.datetime.strptime(FirstDate, "%Y-%m-%d").date()
     Checkout = datetime.datetime.strptime(SecDate, "%Y-%m-%d").date()
     timedeltaSum = Checkout - Checkin
+
     StayDuration = timedeltaSum.days
 
-
-
-    Hotel = Hotels.objects.get(id= hotelid)
+    Hotel = Hotels.objects.get(id = hotelid)
     theRoom = Room.objects.get(id = roomid)
 
     price = theRoom.Price
@@ -46,6 +49,7 @@ def bookRoom(request,hotelid,roomid):
     'totalcost':TotalCost}
     return render(request, 'Reservations/booking.html', context)
 
+# Stores the confirmed booking  into the database
 def storeBooking(request,hotelid,roomid,checkin,checkout,totalcost):
     if request.method == 'POST':
 
@@ -65,6 +69,7 @@ def storeBooking(request,hotelid,roomid,checkin,checkout,totalcost):
         newReservation.CheckOut = checkout
         newReservation.totalPrice = cost
         newReservation.save()
+        #Deletes the session variables.
         del request.session['checkin']
         del request.session['checkout']
         link = reverse('HotelApp:userDash')
@@ -74,20 +79,18 @@ def storeBooking(request,hotelid,roomid,checkin,checkout,totalcost):
         url = reverse('HotelApp:userDash')
         return url
 
+#Shows the user thier previous bookings.
 def mybookings(request):
     bookings = Reservation.objects.filter(user = request.user)
     context = {'bookings':bookings}
     return render(request, 'Reservations/mybookings.html', context)
 
+
+# Allows a user to cancel their previous bookings , deleting a booking onclick.
 def cancelbooking(request,id):
     booking = Reservation.objects.get(id = id)
     booking.delete()
-    Role = request.user.userrole
-    if Role.id == 3:
-
-        link = reverse('Reservations:viewbookings')
-        return HttpResponseRedirect(link)
-    elif Role.id == 4:
-        hotelid = booking.hotel.id
-        link = reverse('ManageHotels:managehotel', args=[hotelid])
-        return HttpResponseRedirect(link)
+    currentuser = request.user
+    Role = UserRole.objects.get(user = request.user)
+    link = reverse('Reservations:viewbookings')
+    return HttpResponseRedirect(link)

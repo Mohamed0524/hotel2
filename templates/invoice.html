@@ -1,0 +1,54 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html"; charset="utf-8">
+    <link href="{% static "css/pdf.css" %}" rel="stylesheet">
+    <title>Booking Confirmation</title>
+
+</head>
+  <body>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 ">
+
+        <div class="container">
+          <center>
+            <!-- Displays the Hotel Details -->
+            <div class="panel panel-default">
+              <div class="panel-heading"><h1 class="big">Check-In.com Reservation</h1></div>
+
+                <div class="panel-body">
+                  <h1><b>{{booking.hotel.Name}}  </b></h1>
+                  <p>{{booking.hotel.Description}}</p>
+                  <p>Address: {{booking.hotel.Address}} , {{booking.hotel.City}} , {{booking.hotel.Country}}.</p>
+                  <p>Contact: {{booking.hotel.TelephoneNumber}}</p>
+                </div>
+            </div>
+              <!-- Displays the Booking Details such as Room name etc.. -->
+            <div class="panel panel-default">
+              <div class="panel-heading"><h3>Booking Details</h3></div>
+                <div class="panel-body">
+
+                   <p><b>Reference Number: </b>{{booking.id}}</p>
+                    <p><b>Guest Name:</b>{{booking.guestFirstName}} {{booking.guestLastName}}</p>
+                    <p><b>Check In Date:  </b>{{booking.CheckIn}}  / <b>Check Out Date:  </b>  {{booking.CheckOut}}</p>
+                    <p><b>Room Name:</b> {{booking.room.RoomType}}</p>
+                    <p><b>Beds Provided:</b> {{booking.room.BedOption}}</p>
+                    <p><b>Room View:</b> {{booking.room.View}}</p>
+                    <p><b>Total Price: GBP </b>{{booking.totalPrice}} </p>
+                </div>
+            </div>
+              <!-- Uses the City that the hotel is located in to pull a map from Google-->
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3>City Map</h3></div>
+                <div class="panel-body">
+                  <img src="https://maps.googleapis.com/maps/api/staticmap?size=680x400&zoom=13&center={{booking.hotel.City}}&style=feature:all|element:all" />
+                </div>
+                <div class="panel-footer"><h3>Enjoy Your Stay In {{booking.hotel.City}} !</h3></div>
+            </div>
+            </center>
+      </div>
+    </div>
+    </div>
+  </body>
+  </html>

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from Authorize.models import Partners
+# Stores all the hotel details and is used to query hotels.
 class Hotels(models.Model):
     Name = models.CharField(max_length  = 255)
     Address = models.CharField(max_length  = 255)
@@ -20,6 +21,7 @@ class Hotels(models.Model):
         return reverse('hoteldetails', kwargs={'pk': self.pk})
     def __str__(self):
          return self.Name
+# Stores the Hotel reviews and is used to query the reviews
 class Review(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     hotel = models.ForeignKey(Hotels,on_delete=models.CASCADE)
@@ -32,7 +34,7 @@ class Review(models.Model):
 
     def __str__(self):
          return self.comment
-
+# Stores the Hotels rooms
 class Room(models.Model):
     hotel = models.ForeignKey(Hotels,on_delete=models.CASCADE)
     RoomType = models.CharField(max_length  = 255)
@@ -48,7 +50,7 @@ class Room(models.Model):
 
     def __str__(self):
          return self.RoomType
-
+# Stores and is used to query partner proposals
 class Proposal(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     CompanyName = models.CharField(max_length  = 255)

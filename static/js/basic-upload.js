@@ -1,4 +1,6 @@
-/* Adapted from https://simpleisbetterthancomplex.com/tutorial/2016/11/22/django-multiple-file-upload-using-ajax.html */
+/* Adapted from https://simpleisbetterthancomplex.com/tutorial/2016/11/22/django-multiple-file-upload-using-ajax.html
+   Uploads the users selected files showing them a progress bar.
+*/
 $(function (){
 
   $(".js-upload-photos").click(function (){

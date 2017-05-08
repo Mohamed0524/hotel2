@@ -14,7 +14,7 @@
 
         {% for reservation in reservations%}
 
-        <a class="btn btn-sm btn-danger pull-right" href="{% url 'Reservations:cancelbooking' reservation.id %}">Cancel</a>
+        <a class="btn btn-sm btn-danger pull-right" href="{% url 'ManageHotels:removebooking' reservation.id %}">Cancel</a>
           <h5><u>{{reservation.room.RoomType}}</u></h5>
           <p><mark>Guest Name :</mark>  {{reservation.guestFirstName}} {{reservation.guestLastName}}.  </p>
           <p><mark>Check-in Date :</mark> {{reservation.CheckIn}}.  </p>
